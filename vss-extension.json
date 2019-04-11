@@ -1,0 +1,36 @@
+{
+    "manifestVersion": 1,
+    "id": "naverticaltasks",
+    "name": "NaverticAl Build and Release Tasks for Business Central",
+    "version": "0.0.1",
+    "publisher": "Kine",
+    "targets": [
+        {
+            "id": "Microsoft.VisualStudio.Services"
+        }
+    ],    
+    "description": "Tasks for building/releasing for Business Central.",
+    "categories": [
+        "Azure Pipelines"
+    ],
+    "icons": {
+        "default": "images/navertica_logo_kruhpng.png"        
+    },
+    "files": [
+        {
+            "path": "buildAndReleaseTask"
+        }
+    ],
+    "contributions": [
+        {
+            "id": "custom-build-release-task",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "buildAndReleaseTask"
+            }
+        }
+    ]
+}

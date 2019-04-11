@@ -1,0 +1,19 @@
+{
+  "name": "nvrbctasks",
+  "version": "0.0.5",
+  "description": "Build and release tasks for Business Central",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "NAVERTICA a.s.",
+  "license": "ISC",
+  "dependencies": {
+    "azure-pipelines-task-lib": "^2.8.0"
+  },
+  "devDependencies": {
+    "@types/mocha": "^5.2.6",
+    "@types/node": "^11.13.2",
+    "@types/q": "^1.5.2"
+  }
+}
