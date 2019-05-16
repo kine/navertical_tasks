@@ -72,6 +72,14 @@
             "helpMarkDown": "Path to the App file to be published. Filter could be used. All found files will be published"
         },
         {
+            "name": "appfileexclude",
+            "type": "string",
+            "label": "App file Exclude",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "Path to the App file to be excluded. Filter could be used."
+        },
+        {
             "name": "appid",
             "type": "string",
             "label": "App ID",
