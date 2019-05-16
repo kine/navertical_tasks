@@ -2,14 +2,14 @@
     "manifestVersion": 1,
     "id": "naverticaltasks",
     "name": "NaverticAl Build and Release Tasks for Business Central",
-    "version": "0.0.1",
+    "version": "0.0.10",
     "publisher": "Kine",
     "targets": [
         {
             "id": "Microsoft.VisualStudio.Services"
         }
     ],    
-    "description": "Tasks for building/releasing for Business Central.",
+    "description": "Tasks for building/releasing for Microsoft Dynamics 365 Business Central.",
     "categories": [
         "Azure Pipelines"
     ],
@@ -18,18 +18,31 @@
     },
     "files": [
         {
-            "path": "buildAndReleaseTask"
+            "path": "publishpertenantTask"
         }
     ],
+    "links": {
+        "getstarted": {
+            "uri": "https://github.com/kine/navertical_tasks"
+        },
+        "issues": {
+            "uri": "https://github.com/kine/navertical_tasks/issues"
+        }
+    },
+    "repository": {
+        "type": "git",
+        "uri": "https://github.com/kine/navertical_tasks.git"
+    },
+
     "contributions": [
         {
-            "id": "custom-build-release-task",
+            "id": "047393e1-82e4-4d24-8275-237409bb378e",
             "type": "ms.vss-distributed-task.task",
             "targets": [
                 "ms.vss-distributed-task.tasks"
             ],
             "properties": {
-                "name": "buildAndReleaseTask"
+                "name": "publishpertenantTask"
             }
         }
     ]
