@@ -14,7 +14,7 @@ try{
     $appsecret = Get-VstsInput -Name 'appsecret' -Require
     $username = Get-VstsInput -Name 'username' -Require
     $userpwd = Get-VstsInput -Name 'userpwd' -Require
-    $appfileexclude = Get-VstsInput -Name 'appfileexclude' -Require
+    $appfileexclude = Get-VstsInput -Name 'appfileexclude' -Default ''
     
     Write-Host "Installing needed modules"
     Install-PackageProvider nuget -force
