@@ -16,22 +16,7 @@ try{
     $userpwd = Get-VstsInput -Name 'userpwd' -Require
     $appfileexclude = Get-VstsInput -Name 'appfileexclude' -Default ''
     
-    Write-Host "Installing needed modules"
-    Install-PackageProvider nuget -force
-    if (-not (Get-Module NVRAppDevOps -ListAvailable)) {
-        Write-Host "Installing module NVRAppDevOps"
-        install-module -Name NVRAppDevOps -Scope CurrentUser -Force
-    } else {
-        Write-Host "Updating module NVRAppDevOps"
-        update-module -Name NVRAppDevOps -Force
-    }
-    if (-not (Get-Module navcontainerhelper -ListAvailable)) {
-        Write-Host "Installing module navcontainerhelper"
-        install-module -Name navcontainerhelper -Scope CurrentUser -Force
-    } else {
-        Write-Host "Updating module navcontainerhelper"
-        update-module -Name navcontainerhelper -Force
-    }
+    . (Join-Path $PSScriptRoot '..\Scripts\UpdateOrIstallModule.ps1')
 
     Write-Host "Importing module NVRAppDevOps"
     Import-Module NVRAppDevOps -DisableNameChecking
