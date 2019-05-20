@@ -2,7 +2,7 @@
     "manifestVersion": 1,
     "id": "naverticaltasks",
     "name": "NaverticAL Build and Release Tasks for Business Central",
-    "version": "0.0.18",
+    "version": "0.0.0",
     "publisher": "Kine",
     "targets": [
         {
