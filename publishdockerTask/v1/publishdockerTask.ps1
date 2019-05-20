@@ -8,6 +8,7 @@ try{
     $containername = Get-VstsInput -Name 'containername' -Require
     $appfile = Get-VstsInput -Name 'appfile' -Default '*.app'
     $appfileexclude = Get-VstsInput -Name 'appfileexclude' -Default ''
+    $appname = Get-VstsInput -Name 'appname' -Require
     $skipverify = Get-VstsInput -Name 'skipverify' -AsBool -Default $false
 
     . (Join-Path $PSScriptRoot '..\Scripts\UpdateOrIstallModule.ps1')

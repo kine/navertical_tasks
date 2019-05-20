@@ -2,7 +2,7 @@
     "manifestVersion": 1,
     "id": "naverticaltasks",
     "name": "NaverticAL Build and Release Tasks for Business Central",
-    "version": "0.0.13",
+    "version": "0.0.18",
     "publisher": "Kine",
     "targets": [
         {
@@ -19,6 +19,12 @@
     "files": [
         {
             "path": "publishpertenantTask"
+        },
+        {
+            "path": "publishdockerTask"
+        },
+        {
+            "path": "Scripts", "addressable":true,"packagePath":"/"
         }
     ],
     "links": {
@@ -52,7 +58,7 @@
                 "ms.vss-distributed-task.tasks"
             ],
             "properties": {
-                "name": "publisdockerTask"
+                "name": "publishdockerTask"
             }
         }
     ]
