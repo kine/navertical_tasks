@@ -11,8 +11,6 @@ try{
     $appname = Get-VstsInput -Name 'appname' -Require
     $skipverify = Get-VstsInput -Name 'skipverify' -AsBool -Default $false
 
-    . (Join-Path $PSScriptRoot '..\Scripts\UpdateOrIstallModule.ps1')
-
     Write-Host "Importing module NVRAppDevOps"
     Import-Module NVRAppDevOps -DisableNameChecking
 

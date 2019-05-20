@@ -16,8 +16,6 @@ try{
     $userpwd = Get-VstsInput -Name 'userpwd' -Require
     $appfileexclude = Get-VstsInput -Name 'appfileexclude' -Default ''
     
-    . (Join-Path $PSScriptRoot '..\Scripts\UpdateOrIstallModule.ps1')
-
     Write-Host "Importing module NVRAppDevOps"
     Import-Module NVRAppDevOps -DisableNameChecking
 
