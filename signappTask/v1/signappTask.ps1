@@ -18,9 +18,11 @@ try{
     foreach ($app in $apps) {
         Write-Host "Signing $($app.FullName)"
         if ($pfxpassword -ne '') {
-            $pfxpwd = (ConvertTo-SecureString -String $pfxpassword -AsPlainText -Force)
+            Write-Host "Password entered, using it"
+            $pfxpwd = (ConvertTo-SecureString -String $pfxpassword -AsPlainText -Force)            
             Sign-NAVContainerApp -containerName $containername -appFile $app.FullName -pfxFile $certfile -pfxPassword $pfxpwd
         } else {
+            Write-Host "No password entered"
             Sign-NAVContainerApp -containerName $containername -appFile $app.FullName -pfxFile $certfile
         }
     }
