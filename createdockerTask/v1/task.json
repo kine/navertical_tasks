@@ -9,7 +9,7 @@
     "version": {
         "Major": 1,
         "Minor": 0,
-        "Patch": 0
+        "Patch": 1
     },
     "visibility": [
         "Build",
@@ -60,9 +60,8 @@
             "type": "string",
             "label": "License file name",
             "defaultValue": "",
-            "required": true,
-            "helpMarkDown": "Name of the license file",
-            "visibleRule": "fastcontainer=false"
+            "required": false,
+            "helpMarkDown": "Name of the license file"
         },
         {
             "name": "auth",

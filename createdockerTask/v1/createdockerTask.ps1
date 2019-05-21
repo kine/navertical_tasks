@@ -7,7 +7,7 @@ try{
     # Get inputs.
     $containername = Get-VstsInput -Name 'containername' -Require
     $imagename = Get-VstsInput -Name 'imagename' -Require
-    $licensefile = Get-VstsInput -Name 'licensefile' -Require
+    $licensefile = Get-VstsInput -Name 'licensefile' -Default ''
     $password = Get-VstsInput -Name 'password' -Default ''
     $username = Get-VstsInput -Name 'username' -Default ''
     $auth = Get-VstsInput -Name 'auth' -Require
