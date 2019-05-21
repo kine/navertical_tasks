@@ -9,7 +9,7 @@
     "version": {
         "Major": 1,
         "Minor": 0,
-        "Patch": 3
+        "Patch": 4
     },
     "visibility": [
         "Build",
@@ -19,10 +19,6 @@
         {
             "name": "envgroup",
             "displayName": "Environment"
-        },
-        {
-            "name": "authgroup",
-            "displayName": "Authentification"
         }
     ],
     "instanceNameFormat": "Publish $(appname) to container $(tenant)",
