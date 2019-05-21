@@ -21,7 +21,7 @@
             "displayName": "Environment"
         }
     ],
-    "instanceNameFormat": "Publish $(appname) to container $(tenant)",
+    "instanceNameFormat": "Publish $(appname) to container $(containername)",
     "inputs": [
         {
             "name": "containername",
