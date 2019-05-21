@@ -22,23 +22,18 @@ try{
     $skipimporttestsuite = (-not $importtestsuite)
 
     if ($fastcontainer) {
-        $optionalparams = 
-@"
--myScripts @(@{"navstart.ps1" = "Write-Host 'Ready for connections!'"
-        "checkhealth.ps1" = "exit 0"
-})
-"@
-        Init-ALEnvironment `
-            -ContainerName $containername `
-            -ImageName $imagename `
-            -Build 'true' `
-            -RepoPath $env:AGENT_RELEASEDIRECTORY `
-            -Auth 'Windows' `
-            -RAM '4GB' `
-            -SkipImportTestSuite `
-            -EnableSymbolLoading $false `
-            -CreateTestWebServices $false `
-            -optionalParameters $optionalparams
+        New-NavContainer -accept_eula `
+            -accept_outdated `
+            -containerName $ontainername `
+            -imageName $imagename `
+            -doNotExportObjectsToText `
+            -alwaysPull `
+            -shortcuts "None" `
+            -auth 'Windows' `
+            -memoryLimit '4GB' `
+            -updateHosts `
+            -useBestContainerOS `
+            -myScripts  @(@{"navstart.ps1" = "Write-Host 'Ready for connections!'","checkhealth.ps1" = "exit 0"})
 
     } else {
 
