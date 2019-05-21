@@ -24,7 +24,7 @@ try{
     if ($fastcontainer) {
         New-NavContainer -accept_eula `
             -accept_outdated `
-            -containerName $ontainername `
+            -containerName $containername `
             -imageName $imagename `
             -doNotExportObjectsToText `
             -alwaysPull `
