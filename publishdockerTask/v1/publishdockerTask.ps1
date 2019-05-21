@@ -16,7 +16,11 @@ try{
 
     $dockerapp = Get-NavContainerAppInfo -containerName $containername  -tenantSpecificProperties | where-object {$_.Name -eq $appname}
     $app = Get-ChildItem $appfile -Recurse -Filter *.app -Exclude $appfileexclude | Select-Object -Last 1
-    Publish-NavContainerApp -containerName $containername -appFile $app.FullName -SkipVerification:$skipverify -sync -install:(-not $dockerapp)
+    $install = -not $dockerapp
+    if (-not $install) {
+        Write-Host "Another version exists on server, will do upgrade"
+    }
+    Publish-NavContainerApp -containerName $containername -appFile $app.FullName -SkipVerification:$skipverify -sync -install:$install
 
     if ($dockerapp) {
         $dockerapp = Get-NavContainerAppInfo -containerName $containername -tenantSpecificProperties | where-object {$_.Name -eq $appname}
