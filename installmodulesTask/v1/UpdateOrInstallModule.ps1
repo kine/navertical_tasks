@@ -9,6 +9,8 @@ if (-not ($NVRAppDevOpsModules)) {
     if ($OnlineModule.Version -ne $NVRAppDevOpsModules[0].Version) {
         Write-Host "Newer version online exists - updating module NVRAppDevOps"
         update-module -Name NVRAppDevOps -Force
+    } else {
+        Write-Host "Latest version of NVRAppDevOps already installed"
     }
 }
 
@@ -21,6 +23,8 @@ if (-not $navcontainerhelpermodules) {
     if ($OnlineModule.Version -ne $navcontainerhelpermodules[0].Version) {
         Write-Host "Newer version online exists - updating module navcontainerhelper"
         update-module -Name navcontainerhelper -Force
+    } else {
+        Write-Host "Latest version of navcontainerhelper already installed"
     }
 }
 
