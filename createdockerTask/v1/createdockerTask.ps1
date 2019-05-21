@@ -33,7 +33,7 @@ try{
             -memoryLimit '4GB' `
             -updateHosts `
             -useBestContainerOS `
-            -myScripts  @(@{"navstart.ps1" = "Write-Host 'Ready for connections!'","checkhealth.ps1" = "exit 0"})
+            -myScripts  @(@{"navstart.ps1" = "Write-Host 'Ready for connections!'";"checkhealth.ps1" = "exit 0"})
 
     } else {
 
