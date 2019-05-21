@@ -28,6 +28,9 @@
         },
         {
             "path": "runtestsTask"
+        },
+        {
+            "path": "signappTask"
         }
     ],
     "links": {
