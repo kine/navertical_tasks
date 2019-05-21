@@ -83,6 +83,16 @@
             "properties": {
                 "name": "runtestsTask"
             }
+        },
+        {
+            "id": "047393e1-82e4-4d24-8275-237409bb378b",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "signappTask"
+            }
         }
     ]
 }
