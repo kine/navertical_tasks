@@ -25,6 +25,9 @@
         },
         {
             "path": "installmodulesTask"
+        },
+        {
+            "path": "runtestsTask"
         }
     ],
     "links": {
@@ -69,6 +72,16 @@
             ],
             "properties": {
                 "name": "installmodulesTask"
+            }
+        },
+        {
+            "id": "047393e1-82e4-4d24-8275-237409bb378c",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "runtestsTask"
             }
         }
     ]
