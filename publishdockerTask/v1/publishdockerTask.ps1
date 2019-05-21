@@ -27,21 +27,21 @@ try{
     if ($dockerapp) {
         $dockerapp = Get-NavContainerAppInfo -containerName $containername -tenantSpecificProperties | where-object {$_.Name -eq $appname} | Sort-Object -Property "Version"
         if ($dockerapp.Count -gt 1) {
-            foreach($app in $dockerapp) {
-                if ($app.IsInstalled) {
-                    $previousVersion = $app
+            foreach($dapp in $dockerapp) {
+                if ($dapp.IsInstalled) {
+                    $previousVersion = $dapp
                 }
-                if ($app.FullName.Contains($app.Version)) {
+                if ($app.FullName.Contains($dapp.Version)) {
                     Write-Host "Upgrading from ${$previousVersion.Version} to ${$app.Version}"
                     Start-NavContainerAppDataUpgrade -containerName $containername -appName $appname -appVersion $app.Version
                     $newInstalledApp = $app
                 }
             }
 
-            foreach($app in $dockerapp) {
-                if ($app.Version -ne $newInstalledApp.Version) {
-                    Write-Host "Unpublishing version $($app.Version)"
-                    Unpublish-NavContainerApp -containerName $containername -appName $appname -version $app.Version
+            foreach($dapp in $dockerapp) {
+                if ($dapp.Version -ne $newInstalledApp.Version) {
+                    Write-Host "Unpublishing version $($dapp.Version)"
+                    Unpublish-NavContainerApp -containerName $containername -appName $appname -version $dapp.Version
                 }
             }
         }
