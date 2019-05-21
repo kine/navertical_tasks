@@ -32,16 +32,16 @@ try{
                     $previousVersion = $dapp
                 }
                 if ($app.FullName.Contains($dapp.Version)) {
-                    Write-Host "Upgrading from ${$previousVersion.Version} to ${$dapp.Version}"
+                    Write-Host "Upgrading from $($previousVersion.Version) to $($dapp.Version)"
                     Start-NavContainerAppDataUpgrade -containerName $containername -appName $appname -appVersion $dapp.Version
-                    $newInstalledApp = $app
+                    $newInstalledApp = $dapp
                 }
             }
 
-            foreach($dapp in $dockerapp) {
-                if ($dapp.Version -ne $newInstalledApp.Version) {
-                    Write-Host "Unpublishing version $($dapp.Version)"
-                    Unpublish-NavContainerApp -containerName $containername -appName $appname -version $dapp.Version
+            foreach($uapp in $dockerapp) {
+                if ($uapp.Version -ne $newInstalledApp.Version) {
+                    Write-Host "Unpublishing version $($uapp.Version)"
+                    Unpublish-NavContainerApp -containerName $containername -appName $appname -version $uapp.Version
                 }
             }
         }
