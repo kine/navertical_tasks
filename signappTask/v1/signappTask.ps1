@@ -19,10 +19,10 @@ try{
         Write-Host "Signing $($app.FullName)"
         if ($pfxpassword -ne '') {
             $pfxpwd = (ConvertTo-SecureString -String $pfxpassword -AsPlainText -Force)
+            Sign-NAVContainerApp -containerName $containername -appFile $app.FullName -pfxFile $certfile -pfxPassword $pfxpwd
         } else {
-            $pfxpwd = ''
+            Sign-NAVContainerApp -containerName $containername -appFile $app.FullName -pfxFile $certfile
         }
-        Sign-NAVContainerApp -containerName $containername -appFile $app.FullName -pfxFile $certfile -pfxPassword $pfxpwd
     }
 
 } finally {
