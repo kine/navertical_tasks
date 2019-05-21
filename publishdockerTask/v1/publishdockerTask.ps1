@@ -32,8 +32,8 @@ try{
                     $previousVersion = $dapp
                 }
                 if ($app.FullName.Contains($dapp.Version)) {
-                    Write-Host "Upgrading from ${$previousVersion.Version} to ${$app.Version}"
-                    Start-NavContainerAppDataUpgrade -containerName $containername -appName $appname -appVersion $app.Version
+                    Write-Host "Upgrading from ${$previousVersion.Version} to ${$dapp.Version}"
+                    Start-NavContainerAppDataUpgrade -containerName $containername -appName $appname -appVersion $dapp.Version
                     $newInstalledApp = $app
                 }
             }
