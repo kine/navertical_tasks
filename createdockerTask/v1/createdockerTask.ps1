@@ -28,23 +28,36 @@ try{
         "checkhealth.ps1" = "exit 0"
 })
 "@
+        Init-ALEnvironment `
+            -ContainerName $containername `
+            -ImageName $imagename `
+            -Build 'true' `
+            -RepoPath $env:AGENT_RELEASEDIRECTORY `
+            -Auth 'Windows' `
+            -RAM '4GB' `
+            -SkipImportTestSuite `
+            -EnableSymbolLoading $false `
+            -CreateTestWebServices $false `
+            -optionalParameters $optionalparams
 
+    } else {
+
+        Init-ALEnvironment `
+            -ContainerName $containername `
+            -ImageName $imagename `
+            -LicenseFile $licensefile `
+            -Build 'true' `
+            -Username $username `
+            -Password $password `
+            -RepoPath $env:AGENT_RELEASEDIRECTORY `
+            -Auth $auth `
+            -RAM $ram `
+            -SkipImportTestSuite:$skipimporttestsuite `
+            -EnableSymbolLoading $enablesymbolloading `
+            -CreateTestWebServices $false `
+            -optionalParameters $optionalparams
     }
-    Init-ALEnvironment `
-                -ContainerName $containername `
-                -ImageName $imagename `
-                -LicenseFile $licensefile `
-                -Build 'true' `
-                -Username $username `
-                -Password $password `
-                -RepoPath $env:AGENT_RELEASEDIRECTORY `
-                -Auth $auth `
-                -RAM $ram `
-                -SkipImportTestSuite:$skipimporttestsuite `
-                -EnableSymbolLoading $enablesymbolloading `
-                -CreateTestWebServices $false `
-                -optionalParameters $optionalparams
-    
+        
 } finally {
     Trace-VstsLeavingInvocation $MyInvocation
 }
