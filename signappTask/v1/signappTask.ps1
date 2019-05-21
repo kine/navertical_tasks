@@ -17,7 +17,12 @@ try{
     $apps = Get-ChildItem $appfile -Recurse -Filter *.app -Exclude $appfileexclude 
     foreach ($app in $apps) {
         Write-Host "Signing $($app.FullName)"
-        Sign-NAVContainerApp -containerName $containername -appFile $app.FullName -pfxFile $certfile -pfxPassword (ConvertTo-SecureString -String $pfxpassword -AsPlainText -Force)
+        if ($pfxpassword -ne '') {
+            $pfxpwd = (ConvertTo-SecureString -String $pfxpassword -AsPlainText -Force)
+        } else {
+            $pfxpwd = ''
+        }
+        Sign-NAVContainerApp -containerName $containername -appFile $app.FullName -pfxFile $certfile -pfxPassword $pfxpwd
     }
 
 } finally {
