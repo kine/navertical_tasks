@@ -23,7 +23,7 @@ try{
 
     if ($fastcontainer) {
         $PWord = ConvertTo-SecureString -String 'Pass@word1' -AsPlainText -Force
-        $User = $Username
+        $User = $env:USERNAME
         $cred = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $User,$PWord
         New-NavContainer -accept_eula `
             -accept_outdated `
