@@ -34,6 +34,9 @@
         },
         {
             "path": "signappTask"
+        },
+        {
+            "path": "removedockerTask"
         }
     ],
     "links": {
@@ -108,6 +111,16 @@
             ],
             "properties": {
                 "name": "createdockerTask"
+            }
+        },
+        {
+            "id": "047393e1-82e4-4d24-8275-237409bb377f",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "removedockerTask"
             }
         }
     ]
