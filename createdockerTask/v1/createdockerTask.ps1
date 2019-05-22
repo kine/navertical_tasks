@@ -22,6 +22,9 @@ try{
     $skipimporttestsuite = (-not $importtestsuite)
 
     if ($fastcontainer) {
+        $PWord = ConvertTo-SecureString -String 'Pass@word1' -AsPlainText -Force
+        $User = $Username
+        $cred = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $User,$PWord
         New-NavContainer -accept_eula `
             -accept_outdated `
             -containerName $containername `
@@ -30,6 +33,7 @@ try{
             -alwaysPull `
             -shortcuts "None" `
             -auth 'Windows' `
+            -Credential $cred `
             -memoryLimit '4GB' `
             -updateHosts `
             -useBestContainerOS `
