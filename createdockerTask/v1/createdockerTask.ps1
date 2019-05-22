@@ -20,7 +20,8 @@ try{
     Write-Host "Importing module NVRAppDevOps"
     Import-Module NVRAppDevOps -DisableNameChecking
     $skipimporttestsuite = (-not $importtestsuite)
-
+    $RepoPath = $env:AGENT_RELEASEDIRECTORY
+    
     if ($fastcontainer) {
         $PWord = ConvertTo-SecureString -String 'Pass@word1' -AsPlainText -Force
         $User = $env:USERNAME
@@ -37,6 +38,7 @@ try{
             -memoryLimit '4GB' `
             -updateHosts `
             -useBestContainerOS `
+            -additionalParameters @("--volume ""$($RepoPath):c:\app""") `
             -myScripts  @(@{"navstart.ps1" = "Write-Host 'Ready for connections!'";"checkhealth.ps1" = "exit 0"})
 
     } else {
@@ -48,7 +50,7 @@ try{
             -Build 'true' `
             -Username $username `
             -Password $password `
-            -RepoPath $env:AGENT_RELEASEDIRECTORY `
+            -RepoPath $RepoPath `
             -Auth $auth `
             -RAM $ram `
             -SkipImportTestSuite:$skipimporttestsuite `
