@@ -16,6 +16,14 @@
     "icons": {
         "default": "images/navertica_logo_kruhpng.png"        
     },
+    "content": {
+        "details": {
+          "path": "overview.md"
+        },
+        "license": {
+          "path": "license.txt"
+        }
+    },
     "files": [
         {
             "path": "publishpertenantTask"
