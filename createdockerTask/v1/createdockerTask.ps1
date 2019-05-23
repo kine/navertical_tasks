@@ -18,6 +18,9 @@ try{
     $optionalparams = Get-VstsInput -Name 'optionalparams' -Default ''
     $isolation = Get-VstsInput -Name 'isolation' -Default ''
 
+    if ($isolation -eq 'default') {
+        $isolation = ''
+    }
     Write-Host "Importing module NVRAppDevOps"
     Import-Module NVRAppDevOps -DisableNameChecking
     $skipimporttestsuite = (-not $importtestsuite)
