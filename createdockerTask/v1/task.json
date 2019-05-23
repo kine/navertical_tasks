@@ -8,8 +8,8 @@
     "author": "Kine",
     "version": {
         "Major": 1,
-        "Minor": 0,
-        "Patch": 9
+        "Minor": 1,
+        "Patch": 0
     },
     "visibility": [
         "Build",
@@ -38,6 +38,19 @@
             "defaultValue": "",
             "required": true,
             "helpMarkDown": "Name of the image for container"
+        },
+        {
+            "name": "isolation",
+            "type": "pickList",
+            "label": "Isolation",
+            "defaultValue": "default",
+            "required": true,
+            "helpMarkDown": "Type of process isolation. Default - let it be on navcontainerhelper.",
+            "options": {
+                "": "default",
+                "process": "Process isolation",
+                "hyperv": "Hyper-V isolation"
+              }
         },
         {
             "name": "fastcontainer",

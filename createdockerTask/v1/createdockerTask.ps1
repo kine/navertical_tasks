@@ -16,6 +16,7 @@ try{
     $fastcontainer = Get-VstsInput -Name 'fastcontainer' -AsBool
     $enablesymbolloading = Get-VstsInput -Name 'enablesymbolloading' -AsBool
     $optionalparams = Get-VstsInput -Name 'optionalparams' -Default ''
+    $isolation = Get-VstsInput -Name 'isolation' -Default ''
 
     Write-Host "Importing module NVRAppDevOps"
     Import-Module NVRAppDevOps -DisableNameChecking
@@ -39,6 +40,7 @@ try{
             -updateHosts `
             -useBestContainerOS `
             -additionalParameters @("--volume ""$($RepoPath):c:\app""") `
+            -isolation $isolation `
             -myScripts  @(@{"navstart.ps1" = "Write-Host 'Ready for connections!'";"checkhealth.ps1" = "exit 0"})
 
     } else {
@@ -56,6 +58,7 @@ try{
             -SkipImportTestSuite:$skipimporttestsuite `
             -EnableSymbolLoading $enablesymbolloading `
             -CreateTestWebServices $false `
+            -Isolation $isolation `
             -optionalParameters $optionalparams
     }
         
