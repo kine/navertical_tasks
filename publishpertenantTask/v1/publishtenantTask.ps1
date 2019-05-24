@@ -31,7 +31,8 @@ try{
                             -APIUri $apiuri `
                             -AppPath $file.FullName `
                             -Environment $environment `
-                            -APIVersion $apiversion
+                            -APIVersion $apiversion `
+                            -WaitForResult
     }
 
 } finally {
