@@ -16,6 +16,16 @@
         "Release"
     ],
     "instanceNameFormat": "Install or update scripts",
+    "inputs": [
+        {
+            "name": "uninstallolderversions",
+            "type": "boolean",
+            "label": "Uninstall old versions",
+            "defaultValue": "false",
+            "required": true,
+            "helpMarkDown": "If set, all old versions of modules will be uninstalled."
+        }
+    ],
     "execution": {
         "PowerShell3": {
             "target": "UpdateOrInstallModule.ps1",

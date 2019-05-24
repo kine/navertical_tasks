@@ -5,7 +5,8 @@ Trace-VstsEnteringInvocation $MyInvocation
 
 try{
     # Get inputs.
- 
+    $uninstallolderversions = Get-VstsInput -Name 'uninstallolderversions' -AsBool
+    
     Write-Host "Checking and Installing needed modules"
     Install-PackageProvider nuget -force | Out-Null
     $NVRAppDevOpsModules = Get-Module NVRAppDevOps -ListAvailable
