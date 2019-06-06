@@ -24,6 +24,9 @@
           "path": "license.txt"
         }
     },
+    "screenshots":[
+        {"path":"images/testPipeline.png"}
+    ],
     "files": [
         {
             "path": "publishpertenantTask"
@@ -48,11 +51,17 @@
         }
     ],
     "links": {
+        "home": {
+            "uri": "https://github.com/kine/navertical_tasks"
+          },
         "getstarted": {
             "uri": "https://github.com/kine/navertical_tasks"
         },
         "issues": {
             "uri": "https://github.com/kine/navertical_tasks/issues"
+        },
+        "learn": {
+            "uri": "https://github.com/kine/navertical_tasks/blob/master/Overview.md"
         }
     },
     "repository": {
