@@ -1,6 +1,6 @@
 {
     "id": "047393e1-82e4-4d24-8275-237409bb378e",
-    "name": "publishpertenant",
+    "name": "publishbcapppertenant",
     "friendlyName": "Business Central - Publish PerTenant App",
     "description": "Publish PerTenant app to Dynamics 365 Business Central tenant",
     "helpMarkDown": "",
@@ -9,7 +9,7 @@
     "version": {
         "Major": 1,
         "Minor": 0,
-        "Patch": 2
+        "Patch": 3
     },
     "visibility": [
         "Build",
