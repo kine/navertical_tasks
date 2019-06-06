@@ -48,6 +48,9 @@
         },
         {
             "path": "removedockerTask"
+        },
+        {
+            "path": "compileappTask"
         }
     ],
     "links": {
@@ -138,6 +141,16 @@
             ],
             "properties": {
                 "name": "removedockerTask"
+            }
+        },
+        {
+            "id": "6d011eb8-627b-48f8-8fef-506f72da1626",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "compileappTask"
             }
         }
     ]
