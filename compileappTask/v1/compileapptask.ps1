@@ -5,14 +5,14 @@ Trace-VstsEnteringInvocation $MyInvocation
 
 try{
     # Get inputs.
-    $containername = Get-VstsInput -Name 'containername' -Require
-    $repopath = Get-VstsInput -Name 'repopath' -Default ''
-    $enablecop = Get-VstsInput -Name 'enablecop' -AsBool
-    $failon = Get-VstsInput -Name 'failon' -Default 'error'
-    $password = Get-VstsInput -Name 'password' -Default ''
-    $username = Get-VstsInput -Name 'username' -Default ''
-    $appdownloadscript = Get-VstsInput -Name 'appdownloadscript' -Default ''
-    $auth = Get-VstsInput -Name 'auth' -Require
+    $containername = Get-VstsInput -Name 'ContainerName' -Require
+    $repopath = Get-VstsInput -Name 'RepoPath' -Default ''
+    $enablecop = Get-VstsInput -Name 'EnableCop' -AsBool
+    $failon = Get-VstsInput -Name 'FailOn' -Default 'error'
+    $password = Get-VstsInput -Name 'Password' -Default ''
+    $username = Get-VstsInput -Name 'Username' -Default ''
+    $appdownloadscript = Get-VstsInput -Name 'AppDownloadScript' -Default ''
+    $auth = Get-VstsInput -Name 'Auth' -Require
 
     Write-Host "Importing module NVRAppDevOps"
     Import-Module NVRAppDevOps -DisableNameChecking

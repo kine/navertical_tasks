@@ -56,3 +56,11 @@ After that, you can use the new tasks in your pipelines through visual designer 
 - Delete file
 - Publish signed app artifact
 ![image](images/signPipeline.png)
+
+## Changelog
+0.0.58
+- CompileBCApp parameters casing fixed
+
+0.0.57 - 6.6.2019
+
+- Add task compilebcapp
