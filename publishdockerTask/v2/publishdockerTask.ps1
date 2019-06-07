@@ -26,9 +26,9 @@ try {
     $cred = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $User,$PWord
     $InternalContainerName = 'BCPS'
     try {
-        Write-Host 'Creating internal container'
         $RepoPath = $SourceFolder
         $RepoPath = Split-Path -Path $RepoPath -Resolve
+        Write-Host "Creating internal container with $RepoPath shared"
         New-NavContainer -accept_eula `
             -accept_outdated `
             -containerName $InternalContainerName `
@@ -44,6 +44,7 @@ try {
             -additionalParameters @("--volume ""$($RepoPath):c:\app""") `
             -myScripts  @(@{"navstart.ps1" = "Write-Host 'Ready for connections!'";"checkhealth.ps1" = "exit 0"})
 
+        Write-Host 'Getting app dependencies and order'
         $AppOrder = Get-ALAppOrder -ContainerName $ContainerName -Path $SourceFolder -Recurse:$Recurse
     } finally  {
         Write-Host 'Remove internal container'
