@@ -8,14 +8,15 @@ This package includes tasks you can use in your Build/Release pipelines for Micr
 - Create Container
 - Sign app through container
 - Publish app to container
+- Publish multiple apps to container (dependencies detection)
 - Publish PerTenant app to online
 - Run Tests in container
 - Remove Container
+- Compile App
+- Set build no. in App.Json and of the build pipeline
 
 ## Planned tasks
 
-- Compile App
-- Multi-app support with automatic dependency detections
 - Create nuget package
 - Get app from nuget
 
@@ -60,6 +61,7 @@ After that, you can use the new tasks in your pipelines through visual designer 
 ## Changelog
 0.0.58
 - CompileBCApp parameters casing fixed
+- PublishDockerTask v2.x added - publishing multiple apps in correct order with new settings
 
 0.0.57 - 6.6.2019
 
