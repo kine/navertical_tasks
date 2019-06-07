@@ -34,18 +34,21 @@ After that, you can use the new tasks in your pipelines through visual designer 
 - Run tests in container
 - Publish test results
 - Remove container
+
 ![image](images/testPipeline.png)
 
 ## Example of Release Pipeline to release the app into QA container...
 
 - Install or update scripts
 - Publish Main App to container
+
 ![image](images/publishPipeline.png)
 
 ## Example of Release Pipeline to release the app online...
 
 - Install or update scripts
 - Publish App to tenant
+
 ![image](images/publishOnlinePipeline.png)
 
 ## Example of Release Pipeline to sign the app...
@@ -56,4 +59,5 @@ After that, you can use the new tasks in your pipelines through visual designer 
 - Sign through container
 - Delete file
 - Publish signed app artifact
+
 ![image](images/signPipeline.png)

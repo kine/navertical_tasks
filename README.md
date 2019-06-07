@@ -34,18 +34,21 @@ After that, you can use the new tasks in your pipelines through visual designer 
 - Run tests in container
 - Publish test results
 - Remove container
+
 ![image](images/testPipeline.png)
 
 ## Example of Release Pipeline to release the app into QA container...
 
 - Install or update scripts
 - Publish Main App to container
+
 ![image](images/publishPipeline.png)
 
 ## Example of Release Pipeline to release the app online...
 
 - Install or update scripts
 - Publish App to tenant
+
 ![image](images/publishOnlinePipeline.png)
 
 ## Example of Release Pipeline to sign the app...
@@ -56,23 +59,32 @@ After that, you can use the new tasks in your pipelines through visual designer 
 - Sign through container
 - Delete file
 - Publish signed app artifact
+
 ![image](images/signPipeline.png)
 
 ## Changelog
 
-0.0.62
+### 0.0.63
+
+- 
+
+### 0.0.62
+
 - Minor Changes
 
-0.0.61
+### 0.0.61
+
 - Fixed CreateDockerTask when used in Build pipeline
 
-0.0.59
+### 0.0.59
+
 - Add SetupBCBuildNo task
 
-0.0.58
+### 0.0.58
+
 - CompileBCApp parameters casing fixed
 - PublishDockerTask v2.x added - publishing multiple apps in correct order with new settings
 
-0.0.57 - 6.6.2019
+### 0.0.57 - 6.6.2019
 
 - Add task compilebcapp
