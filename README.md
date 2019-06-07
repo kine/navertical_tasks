@@ -60,6 +60,9 @@ After that, you can use the new tasks in your pipelines through visual designer 
 
 ## Changelog
 
+0.0.62
+- Minor Changes
+
 0.0.61
 - Fixed CreateDockerTask when used in Build pipeline
 

@@ -54,7 +54,12 @@
         },
         {
             "path": "setupBCBuildNo"
+        },
+        {
+            "path": "images",
+            "addressable": true
         }
+
     ],
     "links": {
         "home": {
