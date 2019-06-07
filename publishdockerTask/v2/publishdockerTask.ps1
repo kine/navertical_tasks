@@ -28,9 +28,7 @@ try {
     try {
         Write-Host 'Creating internal container'
         $RepoPath = $SourceFolder
-        if (-not (Test-Path -Path $RepoPath)) {
-            $RepoPath = Split-Path -Path $RepoPath -Resolve
-        }
+        $RepoPath = Split-Path -Path $RepoPath -Resolve
         New-NavContainer -accept_eula `
             -accept_outdated `
             -containerName $InternalContainerName `
