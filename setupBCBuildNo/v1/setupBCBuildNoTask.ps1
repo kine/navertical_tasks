@@ -8,7 +8,7 @@ try{
     $SourceFolder = Get-VstsInput -Name 'SourceFolder' -Require
     $Contents = Get-VstsInput -Name 'Contents' -Default ''
     $BuildID = Get-VstsInput -Name 'BuildID' -Default $env:BUILD_BUILDID
-    $UpdateAzureDevOpsBuildNo = Get-VstsInput -Name 'UpdateAzureDevOpsBuildNo' -AsBool
+    $UpdateAzureDevOpsBuildNo = Get-VstsInput -Name 'UpdateAzureDevOpsBuildNo' -AsBool -Default 'true'
 
     Write-Host "Importing module NVRAppDevOps"
     Import-Module NVRAppDevOps -DisableNameChecking
