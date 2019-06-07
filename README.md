@@ -59,6 +59,10 @@ After that, you can use the new tasks in your pipelines through visual designer 
 ![image](images/signPipeline.png)
 
 ## Changelog
+
+0.0.59
+- Add SetupBCBuildNo task
+
 0.0.58
 - CompileBCApp parameters casing fixed
 - PublishDockerTask v2.x added - publishing multiple apps in correct order with new settings

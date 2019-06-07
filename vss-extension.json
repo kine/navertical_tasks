@@ -51,6 +51,9 @@
         },
         {
             "path": "compileappTask"
+        },
+        {
+            "path": "setupBCBuildNo"
         }
     ],
     "links": {
@@ -151,6 +154,16 @@
             ],
             "properties": {
                 "name": "compileappTask"
+            }
+        },
+        {
+            "id": "8eb82c81-2b22-4dd9-afb1-e1e22b81d03d",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "SetupBCBuildNo"
             }
         }
     ]
