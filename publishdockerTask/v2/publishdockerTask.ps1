@@ -19,8 +19,36 @@ try {
 
     Write-Host "Importing module NVRAppDevOps"
     Import-Module NVRAppDevOps -DisableNameChecking
+    
+    # Create fast container to be able to get the al app order
+    $PWord = ConvertTo-SecureString -String 'Pass@word1' -AsPlainText -Force
+    $User = $env:USERNAME
+    $cred = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $User,$PWord
+    $InternalContainerName = 'BCPS'
+    try {
+        Write-Host 'Creating internal container'
+        New-NavContainer -accept_eula `
+            -accept_outdated `
+            -containerName $InternalContainerName `
+            -imageName (Get-NavContainerImageName -containerName $ContainerName) `
+            -doNotExportObjectsToText `
+            -alwaysPull `
+            -shortcuts "None" `
+            -auth 'Windows' `
+            -Credential $cred `
+            -memoryLimit '4GB' `
+            -updateHosts `
+            -useBestContainerOS `
+            -additionalParameters @("--volume ""$($SourceFolder):c:\app""") `
+            -myScripts  @(@{"navstart.ps1" = "Write-Host 'Ready for connections!'";"checkhealth.ps1" = "exit 0"})
 
-    $AppOrder = Get-ALAppOrder -ContainerName $ContainerName -Path $SourceFolder -Recurse:$Recurse
+        $AppOrder = Get-ALAppOrder -ContainerName $ContainerName -Path $SourceFolder -Recurse:$Recurse
+    } finally  {
+        Write-Host 'Remove internal container'
+        Remove-NavContainer -containerName $InternalContainerName
+    }
+
+
     #Publish-ALAppTree -ContainerName $ContainerName `
     #                  -SkipVerification:$skipverify `
     #                  -OrderedApps $AppOrder `
