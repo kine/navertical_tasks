@@ -56,6 +56,9 @@
             "path": "setupBCBuildNo"
         },
         {
+            "path": "getBCAppVersion"
+        },
+        {
             "path": "images",
             "addressable": true
         }
@@ -169,6 +172,16 @@
             ],
             "properties": {
                 "name": "SetupBCBuildNo"
+            }
+        },
+        {
+            "id": "6d27c589-0e7f-4737-bba7-a9440ae3f87d",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "GetBCAppVersion"
             }
         }
     ]
