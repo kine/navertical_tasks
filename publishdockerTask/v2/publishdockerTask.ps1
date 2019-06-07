@@ -45,7 +45,7 @@ try {
             -myScripts  @(@{"navstart.ps1" = "Write-Host 'Ready for connections!'";"checkhealth.ps1" = "exit 0"})
 
         Write-Host 'Getting app dependencies and order'
-        $AppOrder = Get-ALAppOrder -ContainerName $ContainerName -Path $SourceFolder -Recurse:$Recurse
+        $AppOrder = Get-ALAppOrder -ContainerName $InternalContainerName -Path $SourceFolder -Recurse:$Recurse
     } finally  {
         Write-Host 'Remove internal container'
         Remove-NavContainer -containerName $InternalContainerName
@@ -79,8 +79,7 @@ try {
         $install = -not $dockerapp
         if ($install) {
             Write-Host "App not exists on server, will install by default"
-        }
-        else {
+        } else {
             Write-Host "Another version exists on server, will do upgrade"
         }
         Publish-NavContainerApp -containerName $ContainerName `
