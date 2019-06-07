@@ -27,6 +27,10 @@ try {
     $InternalContainerName = 'BCPS'
     try {
         Write-Host 'Creating internal container'
+        $RepoPath = $SourceFolder
+        if (-not (Test-Path -Path $RepoPath)) {
+            $RepoPath = Split-Path -Path $RepoPath -Resolve
+        }
         New-NavContainer -accept_eula `
             -accept_outdated `
             -containerName $InternalContainerName `
@@ -39,7 +43,7 @@ try {
             -memoryLimit '4GB' `
             -updateHosts `
             -useBestContainerOS `
-            -additionalParameters @("--volume ""$($SourceFolder):c:\app""") `
+            -additionalParameters @("--volume ""$($RepoPath):c:\app""") `
             -myScripts  @(@{"navstart.ps1" = "Write-Host 'Ready for connections!'";"checkhealth.ps1" = "exit 0"})
 
         $AppOrder = Get-ALAppOrder -ContainerName $ContainerName -Path $SourceFolder -Recurse:$Recurse
