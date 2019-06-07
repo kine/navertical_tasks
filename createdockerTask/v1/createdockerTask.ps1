@@ -25,6 +25,9 @@ try{
     Import-Module NVRAppDevOps -DisableNameChecking
     $skipimporttestsuite = (-not $importtestsuite)
     $RepoPath = $env:AGENT_RELEASEDIRECTORY
+    if (-not $RepoPath) {
+        $RepoPath = $env:AGENT_BUILDDIRECTORY
+    }
     
     if ($fastcontainer) {
         $PWord = ConvertTo-SecureString -String 'Pass@word1' -AsPlainText -Force
