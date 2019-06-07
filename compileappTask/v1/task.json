@@ -9,7 +9,7 @@
     "version": {
         "Major": 1,
         "Minor": 0,
-        "Patch": 1
+        "Patch": 2
     },
     "visibility": [
         "Build"
@@ -87,7 +87,7 @@
             "defaultValue": "",
             "required": false,
             "helpMarkDown": "Name of the user",
-            "visibleRule": "auth=NavUserPassword",
+            "visibleRule": "Auth=NavUserPassword",
             "groupName": "envgroup"
         },
         {
@@ -97,7 +97,7 @@
             "defaultValue": "",
             "required": false,
             "helpMarkDown": "Password of the user",
-            "visibleRule": "auth=NavUserPassword",
+            "visibleRule": "Auth=NavUserPassword",
             "groupName": "envgroup"
         }
     ],
