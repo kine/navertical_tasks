@@ -59,6 +59,9 @@
             "path": "getBCAppVersion"
         },
         {
+            "path": "createALNuSpec"
+        },
+        {
             "path": "images",
             "addressable": true
         }
@@ -182,6 +185,16 @@
             ],
             "properties": {
                 "name": "GetBCAppVersion"
+            }
+        },
+        {
+            "id": "75c9bd7b-4dea-4d2d-bbd6-341e162eddb7",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "CreateBCAppNuspec"
             }
         }
     ]
