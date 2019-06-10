@@ -194,7 +194,7 @@
                 "ms.vss-distributed-task.tasks"
             ],
             "properties": {
-                "name": "CreateBCAppNuspec"
+                "name": "createALNuSpec"
             }
         }
     ]
