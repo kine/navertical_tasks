@@ -10,7 +10,7 @@
     "version": {
         "Major": 1,
         "Minor": 0,
-        "Patch": 0
+        "Patch": 2
     },
     "visibility": [
         "Build",
@@ -35,7 +35,7 @@
         },
         {
             "name": "AppFile",
-            "type": "string",
+            "type": "filePath",
             "label": "App file",
             "defaultValue": "",
             "required": true,
