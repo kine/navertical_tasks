@@ -9,8 +9,8 @@
     "preview": "true",
     "version": {
         "Major": 1,
-        "Minor": 0,
-        "Patch": 1
+        "Minor": 1,
+        "Patch": 0
     },
     "visibility": [
         "Build","Release"
@@ -41,6 +41,14 @@
             "groupName": "envgroup"
         }
     ],
+    "OutputVariables": [{
+        "name" : "Version",
+        "description" : "Version of the app in format X.X.X.X"
+    }, 
+    {
+        "name" : "ShortVersion",
+        "description" : "Version of the app in format X.X.X"
+    }],
     "execution": {
         "PowerShell3": {
             "target": "getBCAppVersion.ps1",
