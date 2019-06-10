@@ -49,7 +49,7 @@ try{
     Set-VstsTaskVariable -Name Version -Value $($AppInfo.Version)
     $VersionShort = "$($AppInfo.Version.Major).$($AppInfo.Version.Minor).$($AppInfo.Version.Build)"
     Write-Host "Setting variable VersionShort to value $VersionShort"
-    Set-VstsTaskVariable -Name Version -Value $VersionShort
+    Set-VstsTaskVariable -Name VersionShort -Value $VersionShort
 
 } finally {
     Trace-VstsLeavingInvocation $MyInvocation
