@@ -9,7 +9,7 @@
     "preview": "true",
     "version": {
         "Major": 1,
-        "Minor": 1,
+        "Minor": 2,
         "Patch": 0
     },
     "visibility": [
@@ -46,7 +46,7 @@
         "description" : "Version of the app in format X.X.X.X"
     }, 
     {
-        "name" : "ShortVersion",
+        "name" : "VersionShort",
         "description" : "Version of the app in format X.X.X"
     }],
     "execution": {
