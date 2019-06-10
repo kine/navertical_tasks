@@ -10,7 +10,7 @@
     "version": {
         "Major": 1,
         "Minor": 0,
-        "Patch": 2
+        "Patch": 3
     },
     "visibility": [
         "Build",
@@ -51,7 +51,7 @@
         },
         {
             "name": "NuspecFileName",
-            "type": "string",
+            "type": "filePath",
             "label": "Nuspec File Name",
             "defaultValue": "myapp.nuspec",
             "required": true,

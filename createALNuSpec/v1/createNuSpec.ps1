@@ -19,6 +19,8 @@ try{
     $Copyright = Get-VstsInput -Name 'Copyright' -Default ''
     $Tags = Get-VstsInput -Name 'Tags' -Default ''
     
+    set-location $env:SYSTEM_DEFAULTWORKINGDIRECTORY
+
     Write-Host "Importing module NVRAppDevOps"
     Import-Module NVRAppDevOps -DisableNameChecking
 
@@ -60,12 +62,13 @@ try{
         }
     }
 
+    $AppVersion = "$($AppInfo.Version.Major).$($AppInfo.Version.Minor).$($AppInfo.Version.Build).$($AppInfo.Version.Revision)"
     Write-Host "Creating NuSpec file for $OneAppFile"
     $id = "$($AppInfo.publisher)_$($AppInfo.name)"
     New-ALNuSpec -AppFile $OneAppFile `
                  -AppName $AppInfo.Name `
                  -Publisher $AppInfo.Publisher `
-                 -AppVersion $AppInfo.Version `
+                 -AppVersion $AppVersion `
                  -NuspecFileName $NuspecFileName `
                  -id $Id `
                  -authors $Authors `
