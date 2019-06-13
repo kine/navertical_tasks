@@ -40,11 +40,11 @@ try{
     if ($UninstallOldVersions) {
         Write-Host "Uninstalling previous versions of NVRAppDevOps"
         $Latest = Get-InstalledModule NVRAppDevOps
-        Get-InstalledModule NVRAppDevOps -AllVersions | Where-Object {$_.Version -ne $Latest.Version} | Uninstall-Module
+        Get-InstalledModule NVRAppDevOps -AllVersions | Where-Object {$_.Version -ne $Latest.Version} | Uninstall-Module -Force
 
         Write-Host "Uninstalling previous versions of navcontainerhelper"
         $Latest = Get-InstalledModule navcontainerhelper
-        Get-InstalledModule navcontainerhelper -AllVersions | Where-Object {$_.Version -ne $Latest.Version} | Uninstall-Module
+        Get-InstalledModule navcontainerhelper -AllVersions | Where-Object {$_.Version -ne $Latest.Version} | Uninstall-Module -Force
     }
 
 } finally {
