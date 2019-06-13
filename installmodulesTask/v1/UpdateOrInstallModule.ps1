@@ -5,7 +5,7 @@ Trace-VstsEnteringInvocation $MyInvocation
 
 try{
     # Get inputs.
-    $uninstallolderversions = Get-VstsInput -Name 'uninstallolderversions' -AsBool
+    $UninstallOldVersions = Get-VstsInput -Name 'UninstallOldVersions' -AsBool
     
     Write-Host "Checking and Installing needed modules"
     Install-PackageProvider nuget -force | Out-Null
@@ -35,6 +35,16 @@ try{
         } else {
             Write-Host "Latest version of navcontainerhelper already installed"
         }
+    }
+
+    if ($UninstallOldVersions) {
+        Write-Host "Uninstalling previous versions of NVRAppDevOps"
+        $Latest = Get-InstalledModule NVRAppDevOps
+        Get-InstalledModule NVRAppDevOps -AllVersions | Where-Object {$_.Version -ne $Latest.Version} | Uninstall-Module
+
+        Write-Host "Uninstalling previous versions of navcontainerhelper"
+        $Latest = Get-InstalledModule navcontainerhelper
+        Get-InstalledModule navcontainerhelper -AllVersions | Where-Object {$_.Version -ne $Latest.Version} | Uninstall-Module
     }
 
 } finally {
