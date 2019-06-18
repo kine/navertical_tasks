@@ -6,8 +6,12 @@ Trace-VstsEnteringInvocation $MyInvocation
 try{
     # Get inputs.
     $containername = Get-VstsInput -Name 'ContainerName' -Require
+    $enablecop = Get-VstsInput -Name 'EnableCop' -AsBool
     $repopath = Get-VstsInput -Name 'RepoPath' -Default ''
     $enablecop = Get-VstsInput -Name 'EnableCop' -AsBool
+    $enableAppSourcecop = Get-VstsInput -Name 'EnableAppsourceCop' -AsBool
+    $enablePerTenantExtensioncop = Get-VstsInput -Name 'EnablePerTenantExtensionCop' -AsBool
+    $enableUIcop = Get-VstsInput -Name 'EnableUICop' -AsBool
     $failon = Get-VstsInput -Name 'FailOn' -Default 'error'
     $password = Get-VstsInput -Name 'Password' -Default ''
     $username = Get-VstsInput -Name 'Username' -Default ''
@@ -27,7 +31,10 @@ try{
                           -Auth $auth `
                           -Username $username `
                           -Password $password `
-                          -AppDownloadScript $appdownloadscript
+                          -AppDownloadScript $appdownloadscript `
+                          -EnableAppSourceCop $enableAppSourcecop `
+                          -EnablePerTenantExtensionCop $enablePerTenantExtensioncop `
+                          -EnableUICop $enableUIcop
 
 
 
