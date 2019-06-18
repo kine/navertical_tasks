@@ -15,7 +15,7 @@ try {
     $SkipVerify = Get-VstsInput -Name 'SkipVerify' -AsBool -Default $false
     $Recurse = Get-VstsInput -Name 'Recurse' -AsBool -Default $false
     $UseDevEndpoint = Get-VstsInput -Name 'UseDevEndpoint' -AsBool -Default $false
-    $AppDownloadScript = Get-VstsInput -Name 'AppDownloadScript' -AsBool -Default $false
+    $AppDownloadScript = Get-VstsInput -Name 'AppDownloadScript' -Default ''
 
     Write-Host "Importing module NVRAppDevOps"
     Import-Module NVRAppDevOps -DisableNameChecking
@@ -77,6 +77,7 @@ try {
             if ($AppDownloadScript) {
                 Write-Host "Trying to download..."
                 Download-ALApp -name $App.name -publisher $App.publisher -version $App.version -targetPath $SourceFolder -AppDownloadScript $AppDownloadScript
+                $AppFile = (Get-ChildItem -Path $SourceFolder -Filter "$($App.publisher)_$($App.name)_*.app" | Select-Object -First 1).FullName
             }
         }
         $dockerapp = Get-NavContainerAppInfo -containerName $ContainerName -tenantSpecificProperties | where-object { $_.Name -eq $App.name }
