@@ -8,8 +8,8 @@
     "author": "Kine",
     "version": {
         "Major": 2,
-        "Minor": 2,
-        "Patch": 5
+        "Minor": 3,
+        "Patch": 0
     },
     "visibility": [
         "Build",

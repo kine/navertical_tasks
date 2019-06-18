@@ -26,7 +26,7 @@ try {
     $cred = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $User,$PWord
     if (Get-NavContainerPath -containerName $ContainerName -path $SourceFolder) {
         Write-Host 'Getting app dependencies and order'
-        $AppOrder = Get-ALAppOrder -ContainerName $InternalContainerName -Path $SourceFolder -Recurse:$Recurse
+        $AppOrder = Get-ALAppOrder -ContainerName $ContainerName -Path $SourceFolder -Recurse:$Recurse
     } else {
         $InternalContainerName = 'BCPS'
         try {
