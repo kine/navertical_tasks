@@ -24,33 +24,37 @@ try {
     $PWord = ConvertTo-SecureString -String 'Pass@word1' -AsPlainText -Force
     $User = $env:USERNAME
     $cred = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $User,$PWord
-    $InternalContainerName = 'BCPS'
-    try {
-        $RepoPath = $SourceFolder
-        $RepoPath = Split-Path -Path $RepoPath -Resolve
-        Write-Host "Creating internal container with $RepoPath shared"
-        New-NavContainer -accept_eula `
-            -accept_outdated `
-            -containerName $InternalContainerName `
-            -imageName (Get-NavContainerImageName -containerName $ContainerName) `
-            -doNotExportObjectsToText `
-            -alwaysPull `
-            -shortcuts "None" `
-            -auth 'Windows' `
-            -Credential $cred `
-            -memoryLimit '4GB' `
-            -updateHosts `
-            -useBestContainerOS `
-            -additionalParameters @("--volume ""$($RepoPath):c:\app""") `
-            -myScripts  @(@{"navstart.ps1" = "Write-Host 'Ready for connections!'";"checkhealth.ps1" = "exit 0"})
-
+    if (Get-NavContainerPath -containerName $ContainerName -path $SourceFolder) {
         Write-Host 'Getting app dependencies and order'
         $AppOrder = Get-ALAppOrder -ContainerName $InternalContainerName -Path $SourceFolder -Recurse:$Recurse
-    } finally  {
-        Write-Host 'Remove internal container'
-        Remove-NavContainer -containerName $InternalContainerName
-    }
+    } else {
+        $InternalContainerName = 'BCPS'
+        try {
+            $RepoPath = $SourceFolder
+            $RepoPath = Split-Path -Path $RepoPath -Resolve
+            Write-Host "Creating internal container with $RepoPath shared"
+            New-NavContainer -accept_eula `
+                -accept_outdated `
+                -containerName $InternalContainerName `
+                -imageName (Get-NavContainerImageName -containerName $ContainerName) `
+                -doNotExportObjectsToText `
+                -alwaysPull `
+                -shortcuts "None" `
+                -auth 'Windows' `
+                -Credential $cred `
+                -memoryLimit '4GB' `
+                -updateHosts `
+                -useBestContainerOS `
+                -additionalParameters @("--volume ""$($RepoPath):c:\app""") `
+                -myScripts  @(@{"navstart.ps1" = "Write-Host 'Ready for connections!'";"checkhealth.ps1" = "exit 0"})
 
+            Write-Host 'Getting app dependencies and order'
+            $AppOrder = Get-ALAppOrder -ContainerName $InternalContainerName -Path $SourceFolder -Recurse:$Recurse
+        } finally  {
+            Write-Host 'Remove internal container'
+            Remove-NavContainer -containerName $InternalContainerName
+        }
+    }
 
     #Publish-ALAppTree -ContainerName $ContainerName `
     #                  -SkipVerification:$skipverify `
