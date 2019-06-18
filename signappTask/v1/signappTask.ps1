@@ -15,6 +15,7 @@ try{
     Import-Module NVRAppDevOps -DisableNameChecking
 
     if (-not $pfxpassword) {
+        Write-Host "Getting pfxpasword from environment $($env:SECRET_CERTPASSWORD)"
         $pfxpassword = $env:SECRET_CERTPASSWORD
     }
     $apps = Get-ChildItem $appfile -Recurse -Filter *.app -Exclude $appfileexclude 
