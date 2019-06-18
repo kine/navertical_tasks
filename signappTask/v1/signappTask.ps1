@@ -14,6 +14,9 @@ try{
     Write-Host "Importing module NVRAppDevOps"
     Import-Module NVRAppDevOps -DisableNameChecking
 
+    if (-not $pfxpassword) {
+        $pfxpassword = $env:SECRET_CERTPASSWORD
+    }
     $apps = Get-ChildItem $appfile -Recurse -Filter *.app -Exclude $appfileexclude 
     foreach ($app in $apps) {
         Write-Host "Signing $($app.FullName)"
