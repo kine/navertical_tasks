@@ -72,7 +72,8 @@ try {
         else {
             $AppFile = (Get-ChildItem -Path $SourceFolder -Filter "$($App.publisher)_$($App.name)_*.app" | Select-Object -First 1).FullName
         }
-        if (-not $AppFile) {
+        $dockerapp = Get-NavContainerAppInfo -containerName $ContainerName -tenantSpecificProperties | where-object { $_.Name -eq $App.name }
+        if ((-not $AppFile) -and (-not $dockerapp)) {
             Write-Host "App $($App.name) from $($App.publisher) not found."
             if ($AppDownloadScript) {
                 Write-Host "Trying to download..."
@@ -80,42 +81,49 @@ try {
                 $AppFile = (Get-ChildItem -Path $SourceFolder -Filter "$($App.publisher)_$($App.name)_*.app" | Select-Object -First 1).FullName
             }
         }
-        $dockerapp = Get-NavContainerAppInfo -containerName $ContainerName -tenantSpecificProperties | where-object { $_.Name -eq $App.name }
         $install = -not $dockerapp
-        if ($install) {
-            Write-Host "App not exists on server, will install by default"
+        if ($AppFile) {
+            if ($install) {
+                Write-Host "App not exists on server, will install by default"
+            } else {
+                Write-Host "Another version exists on server, will do upgrade"
+            }
+            Publish-NavContainerApp -containerName $ContainerName `
+                                    -appFile $AppFile `
+                                    -skipVerification:$SkipVerify `
+                                    -sync `
+                                    -install:$install `
+                                    -syncMode $SyncMode `
+                                    -tenant $Tenant `
+                                    -scope $Scope `
+                                    -useDevEndpoint:$UseDevEndpoint
+        
+            if ($dockerapp) {
+                $dockerapp = Get-NavContainerAppInfo -containerName $ContainerName -tenantSpecificProperties | where-object { $_.Name -eq $App.name } | Sort-Object -Property "Version"
+                if ($dockerapp.Count -gt 1) {
+                    foreach ($dapp in $dockerapp) {
+                        if ($dapp.IsInstalled) {
+                            $previousVersion = $dapp
+                        }
+                        if ($AppFile.Contains($dapp.Version)) {
+                            Write-Host "Upgrading from $($previousVersion.Version) to $($dapp.Version)"
+                            Start-NavContainerAppDataUpgrade -containerName $ContainerName -appName $App.name -appVersion $dapp.Version
+                            $newInstalledApp = $dapp
+                        }
+                    }
+                    foreach ($uapp in $dockerapp) {
+                        if ($uapp.Version -ne $newInstalledApp.Version) {
+                            Write-Host "Unpublishing version $($uapp.Version)"
+                            Unpublish-NavContainerApp -containerName $ContainerName -appName $App.name -version $uapp.Version
+                        }
+                    }
+                }
+            }
         } else {
-            Write-Host "Another version exists on server, will do upgrade"
-        }
-        Publish-NavContainerApp -containerName $ContainerName `
-                                -appFile $AppFile `
-                                -skipVerification:$SkipVerify `
-                                -sync `
-                                -install:$install `
-                                -syncMode $SyncMode `
-                                -tenant $Tenant `
-                                -scope $Scope `
-                                -useDevEndpoint:$UseDevEndpoint
-    
-        if ($dockerapp) {
-            $dockerapp = Get-NavContainerAppInfo -containerName $ContainerName -tenantSpecificProperties | where-object { $_.Name -eq $App.name } | Sort-Object -Property "Version"
-            if ($dockerapp.Count -gt 1) {
-                foreach ($dapp in $dockerapp) {
-                    if ($dapp.IsInstalled) {
-                        $previousVersion = $dapp
-                    }
-                    if ($AppFile.Contains($dapp.Version)) {
-                        Write-Host "Upgrading from $($previousVersion.Version) to $($dapp.Version)"
-                        Start-NavContainerAppDataUpgrade -containerName $ContainerName -appName $App.name -appVersion $dapp.Version
-                        $newInstalledApp = $dapp
-                    }
-                }
-                foreach ($uapp in $dockerapp) {
-                    if ($uapp.Version -ne $newInstalledApp.Version) {
-                        Write-Host "Unpublishing version $($uapp.Version)"
-                        Unpublish-NavContainerApp -containerName $ContainerName -appName $App.name -version $uapp.Version
-                    }
-                }
+            if ($dockerapp) {
+                Write-Host "Using installed version of $($App.name) from $($App.publisher)"
+            } else {
+                Write-Error "App $($App.name) from $($App.publisher) is missing!"
             }
         }
     }
