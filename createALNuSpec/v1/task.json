@@ -9,8 +9,8 @@
     "preview": "true",
     "version": {
         "Major": 1,
-        "Minor": 0,
-        "Patch": 3
+        "Minor": 1,
+        "Patch": 0
     },
     "visibility": [
         "Build",
@@ -97,7 +97,7 @@
             "name": "Description",
             "type": "multiLine",
             "label": "Description",
-            "helpMarkDown": "Description of the NuGet package."
+            "helpMarkDown": "Description of the NuGet package. If empty, Description form the .app file will be used"
         },
         {
             "name": "Copyright",

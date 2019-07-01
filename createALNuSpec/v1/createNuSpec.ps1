@@ -61,7 +61,10 @@ try{
             Remove-NavContainer -containerName $InternalContainerName
         }
     }
-
+    if (-not $Description) {
+        $Description = $AppInfo.Description
+    }
+    
     $AppVersion = "$($AppInfo.Version.Major).$($AppInfo.Version.Minor).$($AppInfo.Version.Build).$($AppInfo.Version.Revision)"
     Write-Host "Creating NuSpec file for $OneAppFile"
     $id = "$($AppInfo.publisher)_$($AppInfo.name)"

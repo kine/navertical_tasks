@@ -64,13 +64,13 @@ After that, you can use the new tasks in your pipelines through visual designer 
 
 ## Changelog
 
-### 0.0.63
+### 0.0.87
 
-- 
+- NuSpec description taken from App if not filled in as parameter
 
-### 0.0.62
+### 0.0.62 - 0.0.86
 
-- Minor Changes
+- Minor Changes and bugfixes
 
 ### 0.0.61
 
