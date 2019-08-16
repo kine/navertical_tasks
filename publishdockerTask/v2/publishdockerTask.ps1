@@ -99,7 +99,7 @@ try {
                                     -useDevEndpoint:$UseDevEndpoint
         
             if ($dockerapp) {
-                $dockerapp = Get-NavContainerAppInfo -containerName $ContainerName -tenantSpecificProperties | where-object { $_.Name -eq $App.name } | Sort-Object -Property "Version"
+                $dockerapp = Get-NavContainerAppInfo -containerName $ContainerName -tenantSpecificProperties -sort None | where-object { $_.Name -eq $App.name } | Sort-Object -Property "Version"
                 if ($dockerapp.Count -gt 1) {
                     foreach ($dapp in $dockerapp) {
                         if ($dapp.IsInstalled) {
