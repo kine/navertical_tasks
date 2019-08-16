@@ -72,7 +72,7 @@ try {
         else {
             $AppFile = (Get-ChildItem -Path $SourceFolder -Filter "$($App.publisher)_$($App.name)_*.app" | Select-Object -First 1).FullName
         }
-        $dockerapp = Get-NavContainerAppInfo -containerName $ContainerName -tenantSpecificProperties | where-object { $_.Name -eq $App.name }
+        $dockerapp = Get-NavContainerAppInfo -containerName $ContainerName -tenantSpecificProperties -sort None | where-object { $_.Name -eq $App.name }
         if ((-not $AppFile) -and (-not $dockerapp)) {
             Write-Host "App $($App.name) from $($App.publisher) not found."
             if ($AppDownloadScript) {
