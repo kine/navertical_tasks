@@ -101,11 +101,12 @@ try {
             if ($dockerapp) {
                 $dockerapp = Get-NavContainerAppInfo -containerName $ContainerName -tenantSpecificProperties -sort None | where-object { $_.Name -eq $App.name } | Sort-Object -Property "Version"
                 if ($dockerapp.Count -gt 1) {
+                    $newInstalledApp = $null
                     foreach ($dapp in $dockerapp) {
                         if ($dapp.IsInstalled) {
                             $previousVersion = $dapp
                         }
-                        if ($AppFile.Contains($dapp.Version)) {
+                        if (($AppFile.Contains($dapp.Version)) -and (-not $newInstalledApp)) {
                             Write-Host "Upgrading from $($previousVersion.Version) to $($dapp.Version)"
                             Start-NavContainerAppDataUpgrade -containerName $ContainerName -appName $App.name -appVersion $dapp.Version
                             $newInstalledApp = $dapp
