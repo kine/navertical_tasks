@@ -64,6 +64,10 @@ After that, you can use the new tasks in your pipelines through visual designer 
 
 ## Changelog
 
+### 0.0.91
+
+- Fixed bug with duplicities from get-navcontainerappinfo in PublishDocker task
+
 ### 0.0.88-0.0.90
 
 - Fixed bug in publishbcappdocker because missing new parameter introduced in navcontainerhelper to sort result (failing on recursion)
