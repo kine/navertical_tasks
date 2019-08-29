@@ -15,6 +15,7 @@ try{
     $importtestsuite = Get-VstsInput -Name 'importtestsuite' -AsBool
     $fastcontainer = Get-VstsInput -Name 'fastcontainer' -AsBool
     $enablesymbolloading = Get-VstsInput -Name 'enablesymbolloading' -AsBool
+    $includeCSide = Get-VstsInput -Name 'includeCSide' -AsBool
     $optionalparams = Get-VstsInput -Name 'optionalparams' -Default ''
     $isolation = Get-VstsInput -Name 'isolation' -Default ''
 
@@ -65,6 +66,7 @@ try{
             -EnableSymbolLoading $enablesymbolloading `
             -CreateTestWebServices $false `
             -Isolation $isolation `
+            -IncludeCSide $includeCSide `
             -optionalParameters $optionalparams
     }
         

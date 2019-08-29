@@ -8,7 +8,7 @@
     "author": "Kine",
     "version": {
         "Major": 1,
-        "Minor": 2,
+        "Minor": 3,
         "Patch": 1
     },
     "visibility": [
@@ -122,6 +122,14 @@
             "label": "Enable symbol loading",
             "defaultValue": "false",
             "helpMarkDown": "Enable hybrid development",
+            "visibleRule": "fastcontainer=false"
+        },
+        {
+            "name": "includeCSide",
+            "type": "boolean",
+            "label": "Iclude CSide in the container (should be disabled for containers v15.x+)",
+            "defaultValue": "true",
+            "helpMarkDown": "Include CSide in the container",
             "visibleRule": "fastcontainer=false"
         },
         {
