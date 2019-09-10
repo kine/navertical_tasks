@@ -65,7 +65,7 @@ try {
     #                  -AppDownloadScript $AppDownloadScript `
     #                  -UseDevEndpoint:$UseDevEndpoint `
     #                  -Tenant $Tenant
-    foreach ($App in $AppOrder) {
+    foreach ($App in ($AppOrder |where-object {$_.publisher -ne 'Microsoft'})) {
         if ($App.AppPath -like '*.app') {
             $AppFile = $App.AppPath
         }
