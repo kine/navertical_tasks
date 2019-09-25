@@ -106,7 +106,7 @@ try {
                         if ($dapp.IsInstalled) {
                             $previousVersion = $dapp
                         }
-                        if (($AppFile.Contains($dapp.Version)) -and (-not $newInstalledApp)) {
+                        if (($AppFile.Contains($dapp.Version)) -and (-not $newInstalledApp) -and $previousVersion) {
                             Write-Host "Upgrading from $($previousVersion.Version) to $($dapp.Version)"
                             Start-NavContainerAppDataUpgrade -containerName $ContainerName -appName $App.name -appVersion $dapp.Version
                             $newInstalledApp = $dapp

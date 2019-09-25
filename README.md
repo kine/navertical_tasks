@@ -64,6 +64,10 @@ After that, you can use the new tasks in your pipelines through visual designer 
 
 ## Changelog
 
+### 0.0.94
+
+- Fixed bug when trying to upgrade App from '' version (previous app published but never installed)
+
 ### 0.0.91
 
 - Fixed bug with duplicities from get-navcontainerappinfo in PublishDocker task
