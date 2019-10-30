@@ -78,6 +78,27 @@ try {
             if ($AppDownloadScript) {
                 Write-Host "Trying to download..."
                 Download-ALApp -name $App.name -publisher $App.publisher -version $App.version -targetPath $SourceFolder -AppDownloadScript $AppDownloadScript
+                Write-Host "Getting dependencies after download"
+                $AppListAfterDownload = Get-ALAppOrder -ContainerName $ContainerName -Path $SourceFolder -Recurse
+                #Download-ALAppFromNuget -Source "BCApps" -SourceUrl "https://navertica.pkgs.visualstudio.com/_packaging/BCApps/nuget/v3/index.json" -Key $(System.AccessToken) -LatestVersion
+                foreach ($AfterDownloadApp in ($AppListAfterDownload |where-object {$_.publisher -ne 'Microsoft'})) {
+                    if ($AfterDownloadApp.name -eq $App.name) {
+                        break
+                    }
+                    $afterdockerapp = Get-NavContainerAppInfo -containerName $ContainerName -tenantSpecificProperties -sort None | where-object { $_.Name -eq $AfterDownloadApp.name }
+                    if (-not $dockerapp) {
+                        Write-Host "Installing downloaded dependency $($afterdockerapp.name)"
+                        Publish-NavContainerApp -containerName $ContainerName `
+                            -appFile $AfterDownloadApp.AppFile `
+                            -skipVerification:$SkipVerify `
+                            -sync `
+                            -install `
+                            -syncMode $SyncMode `
+                            -tenant $Tenant `
+                            -scope $Scope `
+                            -useDevEndpoint:$UseDevEndpoint
+                    }
+                } 
                 $AppFile = (Get-ChildItem -Path $SourceFolder -Filter "$($App.publisher)_$($App.name)_*.app" | Select-Object -First 1).FullName
             }
         }

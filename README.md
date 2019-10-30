@@ -64,6 +64,10 @@ After that, you can use the new tasks in your pipelines through visual designer 
 
 ## Changelog
 
+### 0.0.97
+
+- publishdockerTask fixing when downloaded dependency not installed
+
 ### 0.0.95
 
 - v2 of runtestsTask to support new parameters of navcontainerhelper function (extensionID, restartandretry)
