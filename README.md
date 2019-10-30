@@ -64,6 +64,11 @@ After that, you can use the new tasks in your pipelines through visual designer 
 
 ## Changelog
 
+### 0.0.95
+
+- v2 of runtestsTask to support new parameters of navcontainerhelper function (extensionID, restartandretry)
+- v2 of createdockerTask to support new parameter TestLibraryOnly to speed up container creation 
+
 ### 0.0.94
 
 - Fixed bug when trying to upgrade App from '' version (previous app published but never installed)
