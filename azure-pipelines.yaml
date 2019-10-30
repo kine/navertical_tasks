@@ -1,5 +1,5 @@
 pool:
-  name: Default
+  name: BC
   demands: npm
 
 #Your build pipeline references an undefined variable named ‘Extension.Version’. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
