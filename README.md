@@ -64,6 +64,10 @@ After that, you can use the new tasks in your pipelines through visual designer 
 
 ## Changelog
 
+### 0.0.98
+
+- fixes in publishdockerTask when dependency is downloaded
+
 ### 0.0.97
 
 - publishdockerTask fixing when downloaded dependency not installed

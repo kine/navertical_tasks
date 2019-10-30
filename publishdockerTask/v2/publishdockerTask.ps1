@@ -86,10 +86,10 @@ try {
                         break
                     }
                     $afterdockerapp = Get-NavContainerAppInfo -containerName $ContainerName -tenantSpecificProperties -sort None | where-object { $_.Name -eq $AfterDownloadApp.name }
-                    if (-not $dockerapp) {
-                        Write-Host "Installing downloaded dependency $($afterdockerapp.name)"
+                    if (-not $afterdockerapp) {
+                        Write-Host "Installing downloaded dependency $($AfterDownloadApp.name)"
                         Publish-NavContainerApp -containerName $ContainerName `
-                            -appFile $AfterDownloadApp.AppFile `
+                            -appFile $AfterDownloadApp.AppPath `
                             -skipVerification:$SkipVerify `
                             -sync `
                             -install `
