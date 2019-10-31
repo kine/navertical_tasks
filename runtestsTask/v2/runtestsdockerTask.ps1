@@ -15,12 +15,18 @@ try{
     $password  = Get-VstsInput -Name 'password' -Default ""
     $extensionid  = Get-VstsInput -Name 'extensionid' -Default ""
     $restartContainerAndRetry = Get-VstsInput -Name 'restartandretry' -AsBool
+    $createnewcompany = Get-VstsInput -Name 'createnewcompany' -AsBool
 
     Write-Host "Importing module NVRAppDevOps"
     Import-Module NVRAppDevOps -DisableNameChecking
 
     $FullPath = [System.IO.Path]::GetFullPath($testfile)
-    Run-ALTestInContainer -ContainerName $containername -detailed -AzureDevOps $resultonerror -XUnitResultFileName "$FullPath" -testSuite $testsuite -Auth $auth -Username $username -Password $password -tenant $tenant -extensionId $extensionid -restartContainerAndRetry:$restartContainerAndRetry
+
+    if ($createnewcompany) {
+        $TestCompanyName = 'NVRTask_Tests'
+        New-CompanyInBCContainer -containerName $containername -tenant $tenant -companyName $TestCompanyName
+    }
+    Run-ALTestInContainer -ContainerName $containername -detailed -AzureDevOps $resultonerror -XUnitResultFileName "$FullPath" -testSuite $testsuite -Auth $auth -Username $username -Password $password -tenant $tenant -extensionId $extensionid -restartContainerAndRetry:$restartContainerAndRetry -companyName $TestCompanyName
 
 } finally {
     Trace-VstsLeavingInvocation $MyInvocation
