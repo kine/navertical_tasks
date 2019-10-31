@@ -62,8 +62,8 @@ try {
         #                  -AppDownloadScript $AppDownloadScript `
         #                  -UseDevEndpoint:$UseDevEndpoint `
         #                  -Tenant $Tenant
-        Write-Host "Checking availability of dependencies..."
-        foreach ($App in ([array]::Reverse($AppOrder) |where-object {$_.publisher -ne 'Microsoft'})) {
+        Write-Host "Checking availability of dependencies ($($AppOrder.Count))..."
+        foreach ($App in ($AppOrder |where-object {$_.publisher -ne 'Microsoft'})) {
             if ($App.AppPath -like '*.app') {
                 $AppFile = $App.AppPath
             }
