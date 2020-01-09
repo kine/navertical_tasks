@@ -26,8 +26,11 @@ try{
         $TestCompanyName = 'NVRTask_Tests'
         New-CompanyInBCContainer -containerName $containername -tenant $tenant -companyName $TestCompanyName
     }
-    Run-ALTestInContainer -ContainerName $containername -detailed -AzureDevOps $resultonerror -XUnitResultFileName "$FullPath" -testSuite $testsuite -Auth $auth -Username $username -Password $password -tenant $tenant -extensionId $extensionid -restartContainerAndRetry:$restartContainerAndRetry -companyName $TestCompanyName
-
+    $result=Run-ALTestInContainer -ContainerName $containername -detailed -AzureDevOps $resultonerror -XUnitResultFileName "$FullPath" -testSuite $testsuite -Auth $auth -Username $username -Password $password -tenant $tenant -extensionId $extensionid -restartContainerAndRetry:$restartContainerAndRetry -companyName $TestCompanyName -returnTrueIfAllPassed
+    if (($resultonerror -eq 'error') -and ($result -eq $false)) {
+        # Fail if any errors.
+        Write-VstsSetResult -Result 'Failed' -Message "Error detected" -DoNotThrow
+    }
 } finally {
     Trace-VstsLeavingInvocation $MyInvocation
 }
