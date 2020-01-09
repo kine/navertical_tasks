@@ -64,6 +64,10 @@ After that, you can use the new tasks in your pipelines through visual designer 
 
 ## Changelog
 
+### 0.0.100
+
+- fix runbctestincontainer to fail task when some test fails
+
 ### 0.0.99
 
 - fixes in publishdockerTask when dependency is downloaded (some dependencies could be missed)
