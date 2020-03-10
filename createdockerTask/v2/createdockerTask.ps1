@@ -19,6 +19,7 @@ try{
     $includeCSide = Get-VstsInput -Name 'includeCSide' -AsBool
     $optionalparams = Get-VstsInput -Name 'optionalparams' -Default ''
     $isolation = Get-VstsInput -Name 'isolation' -Default ''
+    $UseBestOS = Get-VstsInput -Name 'useBestContainerOS' -AsBool
 
     if ($isolation -eq 'default') {
         $isolation = ''
@@ -46,7 +47,7 @@ try{
             -Credential $cred `
             -memoryLimit '4GB' `
             -updateHosts `
-            -useBestContainerOS `
+            -useBestContainerOS:$UseBestOS `
             -additionalParameters @("--volume ""$($RepoPath):c:\app""") `
             -isolation $isolation `
             -myScripts  @(@{"navstart.ps1" = "Write-Host 'Ready for connections!'";"checkhealth.ps1" = "exit 0"})
@@ -63,6 +64,7 @@ try{
             -RepoPath $RepoPath `
             -Auth $auth `
             -RAM $ram `
+            -useBestContainerOS:$UseBestOS `
             -SkipImportTestSuite:$skipimporttestsuite `
             -TestLibraryOnly:$testlibraryonly `
             -EnableSymbolLoading $enablesymbolloading `
