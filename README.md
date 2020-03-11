@@ -64,6 +64,10 @@ After that, you can use the new tasks in your pipelines through visual designer 
 
 ## Changelog
 
+### 0.0.107
+
+- add useBestContainerOS to CreateContainer task v3.0.0
+
 ### 0.0.100
 
 - fix runbctestincontainer to fail task when some test fails
