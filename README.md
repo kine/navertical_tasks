@@ -64,6 +64,10 @@ After that, you can use the new tasks in your pipelines through visual designer 
 
 ## Changelog
 
+### 0.0.10
+
+- v2 installbcmodules with possibility to use specific version of modules (e.g. when some module version have bugs)
+
 ### 0.0.107
 
 - add useBestContainerOS to CreateContainer task v3.0.0
