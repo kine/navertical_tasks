@@ -64,6 +64,10 @@ After that, you can use the new tasks in your pipelines through visual designer 
 
 ## Changelog
 
+### 0.0.110
+
+- CompileBCApps RulesetFile is now plain string instead filePath to be able to enter relative path from App root folder
+
 ### 0.0.109
 
 - v2 CompileBCApps wiht RulesetFile and AsmProbingPaths parameters
