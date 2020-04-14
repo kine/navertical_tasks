@@ -64,6 +64,10 @@ After that, you can use the new tasks in your pipelines through visual designer 
 
 ## Changelog
 
+### 0.0.109
+
+- v2 CompileBCApps wiht RulesetFile and AsmProbingPaths parameters
+
 ### 0.0.108
 
 - v2 installbcmodules with possibility to use specific version of modules (e.g. when some module version have bugs)
