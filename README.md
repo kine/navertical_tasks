@@ -64,6 +64,10 @@ After that, you can use the new tasks in your pipelines through visual designer 
 
 ## Changelog
 
+### 0.0.111
+
+- When error during unpublishing of previous version of app, it will be ignored. E.g. when app is used on another tenant
+
 ### 0.0.110
 
 - CompileBCApps RulesetFile is now plain string instead filePath to be able to enter relative path from App root folder

@@ -135,8 +135,8 @@ try {
                         }
                         foreach ($uapp in $dockerapp) {
                             if ($uapp.Version -ne $newInstalledApp.Version) {
-                                Write-Host "Unpublishing version $($uapp.Version)"
-                                Unpublish-NavContainerApp -containerName $ContainerName -appName $App.name -version $uapp.Version
+                                Write-Host "Unpublishing version $($uapp.Version) if possible"
+                                Unpublish-NavContainerApp -containerName $ContainerName -appName $App.name -version $uapp.Version -ErrorAction SilentlyContinue
                             }
                         }
                     }
