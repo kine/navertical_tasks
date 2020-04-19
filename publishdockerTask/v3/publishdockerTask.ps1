@@ -35,6 +35,15 @@ try {
         if (($HostName -eq '.') -and (Get-NavContainerPath -containerName $ContainerName -path $SourceFolder)) {
             $OrderContainerName = $ContainerName
         } else {
+            $Code = {
+                param(
+                    $ContainerName
+                )
+                Get-NavContainerImageName -containerName $ContainerName
+            }
+            Write-Host "Getting image name from $ContainerName on host $HostName"
+            $ImageName = Invoke-Command -Session $pssession -ScriptBlock $Code -ArgumentList $ContainerName
+            Write-Host "Image used: $ImageName"
             $InternalContainerName = 'BCPS'
             $RepoPath = $SourceFolder
             $RepoPath = Split-Path -Path $RepoPath -Resolve
@@ -42,7 +51,7 @@ try {
             New-NavContainer -accept_eula `
                 -accept_outdated `
                 -containerName $InternalContainerName `
-                -imageName (Get-NavContainerImageName -containerName $ContainerName) `
+                -imageName $ImageName `
                 -doNotExportObjectsToText `
                 -alwaysPull `
                 -shortcuts "None" `
