@@ -64,6 +64,10 @@ After that, you can use the new tasks in your pipelines through visual designer 
 
 ## Changelog
 
+### 0.0.113 - 0.0.115
+
+- Bugfix for publicbcappdocker v3
+
 ### 0.0.112
 
 - Add support for remote host in publishbcappdocker v3
