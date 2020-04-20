@@ -62,7 +62,7 @@ try {
                 -Credential $cred `
                 -memoryLimit '4GB' `
                 -updateHosts `
-                -useBestContainerOS `
+                -useBestContainerOS:$false `
                 -additionalParameters @("--volume ""$($RepoPath):c:\app""") `
                 -myScripts  @(@{"navstart.ps1" = "Write-Host 'Ready for connections!'";"checkhealth.ps1" = "exit 0"})
     
@@ -163,7 +163,7 @@ try {
                     }
                     $TargetFileName = Invoke-Command -Session $pssession -ScriptBlock $Code -ArgumentList $FileName
                     Write-Host "Transfering to remote from $AppFile to $TargetFileName"
-                    Copy-Item -ToSession $session -Path $AppFile -Destination $TargetFileName -Force
+                    Copy-Item -ToSession $pssession -Path $AppFile -Destination $TargetFileName -Force
                     $Code = {
                         param(
                             $ContainerName,
