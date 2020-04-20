@@ -64,7 +64,7 @@ After that, you can use the new tasks in your pipelines through visual designer 
 
 ## Changelog
 
-### 0.0.113 - 0.0.115
+### 0.0.113 - 0.0.117
 
 - Bugfix for publicbcappdocker v3
 
