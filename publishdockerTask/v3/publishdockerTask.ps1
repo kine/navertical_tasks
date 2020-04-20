@@ -43,6 +43,9 @@ try {
             }
             Write-Host "Getting image name from $ContainerName on host $HostName"
             $ImageName = Invoke-Command -Session $pssession -ScriptBlock $Code -ArgumentList $ContainerName
+            if ($i -match '.+(-ltsc\d{4})') {
+                $ImageName = $Matches[1]
+            }
             Write-Host "Image used: $ImageName"
             $InternalContainerName = 'BCPS'
             $RepoPath = $SourceFolder
