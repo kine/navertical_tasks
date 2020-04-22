@@ -69,6 +69,7 @@ try{
             -EnableSymbolLoading $enablesymbolloading `
             -CreateTestWebServices $false `
             -Isolation $isolation `
+            -useBestContainerOS:$UseBestOS `
             -IncludeCSide $includeCSide `
             -optionalParameters $optionalparams
     }

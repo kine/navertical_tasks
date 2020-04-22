@@ -64,7 +64,11 @@ After that, you can use the new tasks in your pipelines through visual designer 
 
 ## Changelog
 
-### 0.0.113 - 0.0.117
+### 0.0.120
+
+- Bugfix UseBestContainerOS when creating docker container ignored this setting
+
+### 0.0.113 - 0.0.119
 
 - Bugfix for publicbcappdocker v3
 
