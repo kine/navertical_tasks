@@ -215,7 +215,7 @@ try {
                                     )
                                     Start-NavContainerAppDataUpgrade -containerName $ContainerName -appName $App.name -appVersion $dapp.Version
                                 }
-                                Invoke-Command -Session $pssession -ScriptBlock $Code -ArgumentList $ComputerName,$App,$dapp
+                                Invoke-Command -Session $pssession -ScriptBlock $Code -ArgumentList $ContainerName,$App,$dapp
                                 $newInstalledApp = $dapp
                             }
                         }
@@ -245,7 +245,7 @@ try {
         }
     } finally  {
         if ($InternalContainerName) {
-            Write-Host 'Remove internal container'
+            Write-Host "Remove internal container $InternalContainerName"
             Remove-NavContainer -containerName $InternalContainerName
         }
     }

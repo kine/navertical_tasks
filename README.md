@@ -64,6 +64,10 @@ After that, you can use the new tasks in your pipelines through visual designer 
 
 ## Changelog
 
+### 0.0.121
+
+- Fix "Error: No such container: powershell" in publishbcappdocker v3
+
 ### 0.0.120
 
 - Bugfix UseBestContainerOS when creating docker container ignored this setting
