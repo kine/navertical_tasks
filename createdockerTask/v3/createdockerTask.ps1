@@ -20,6 +20,7 @@ try{
     $optionalparams = Get-VstsInput -Name 'optionalparams' -Default ''
     $isolation = Get-VstsInput -Name 'isolation' -Default ''
     $UseBestOS = Get-VstsInput -Name 'useBestContainerOS' -AsBool
+    $AlwaysPull = Get-VstsInput -Name 'alwaysPull' -AsBool
 
     if ($isolation -eq 'default') {
         $isolation = ''
@@ -70,6 +71,7 @@ try{
             -CreateTestWebServices $false `
             -Isolation $isolation `
             -useBestContainerOS:$UseBestOS `
+            -alwaysPull $AlwaysPull `
             -IncludeCSide $includeCSide `
             -optionalParameters $optionalparams
     }

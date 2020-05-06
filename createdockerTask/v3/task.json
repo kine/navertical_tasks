@@ -148,6 +148,14 @@
             "helpMarkDown": "Use BestContainerOS switch when creating the container"
         },
         {
+            "name": "alwaysPull",
+            "type": "boolean",
+            "label": "Always Pull",
+            "defaultValue": "false",
+            "helpMarkDown": "Use AlwaysPull switch when creating the container",
+            "visibleRule": "fastcontainer=false"
+        },
+        {
             "name": "optionalparams",
             "type": "string",
             "label": "Additional optional parameters",
