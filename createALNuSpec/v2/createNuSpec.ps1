@@ -42,7 +42,7 @@ try{
             New-NavContainer -accept_eula `
                 -accept_outdated `
                 -containerName $InternalContainerName `
-                -artifactUrl 'https://bcartifacts.azureedge.net/businesscentral/sandbox/latest' `
+                -artifactUrl (Get-BCContainerArtifactUrl -containerName $ContainerName) `
                 -doNotExportObjectsToText `
                 -alwaysPull `
                 -shortcuts "None" `

@@ -39,8 +39,8 @@ try {
                 param(
                     $ContainerName
                 )
-                Write-Host 'Use fixed artifact url for now...'
-                'https://bcartifacts.azureedge.net/businesscentral/sandbox/latest'
+                
+                Get-BCContainerArtifactUrl $ContainerName
             }
             Write-Host "Getting artifactUrl from $ContainerName on host $HostName"
             $ArtifactUrl = Invoke-Command -Session $pssession -ScriptBlock $Code -ArgumentList $ContainerName
