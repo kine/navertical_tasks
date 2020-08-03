@@ -64,6 +64,10 @@ After that, you can use the new tasks in your pipelines through visual designer 
 
 ## Changelog
 
+### 0.0.126
+
+- installbcmodules v3 - instal bccontainerhelper instead navcontainerhelper
+
 ### 0.0.121
 
 - Fix "Error: No such container: powershell" in publishbcappdocker v3
