@@ -13,9 +13,10 @@ try{
             $requiredversion,
             $allowPreRelease
         )
-        $ExistingModule = Get-Module $modulename -ListAvailable
+        #$ExistingModule = Get-Module $modulename -ListAvailable
+        $ExistingModule = Get-InstalledModule $modulename -ErrorAction SilentlyContinue
         if (-not ($ExistingModule)) {
-            Write-Host "Installing module $modulename $requiredversion"
+            Write-Host "Installing module $modulename $requiredversion AllowPrerelease:$($allowPreRelease)"
             if ($requiredversion) {
                 install-module -Name $modulename -Scope CurrentUser -Force -RequiredVersion $requiredversion -AllowPrerelease:$allowPreRelease
             } else {
@@ -27,8 +28,8 @@ try{
             } else {
                 $OnlineModule = Find-Module $modulename -AllowPrerelease:$allowPreRelease
             }
-            if ($OnlineModule.Version -ne $ExistingModule[0].Version) {
-                Write-Host "Newer version online exists - updating module $modulename"
+            if ($OnlineModule.Version -ne $ExistingModule[0].version) {
+                Write-Host "Newer version online exists - updating module $modulename AllowPrerelease:$($allowPreRelease)"
                 if ($requiredversion) {
                     update-module -Name $modulename -Force -RequiredVersion $requiredversion -AllowPrerelease:$allowPreRelease
                 } else {
