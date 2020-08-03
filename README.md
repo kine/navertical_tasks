@@ -64,6 +64,10 @@ After that, you can use the new tasks in your pipelines through visual designer 
 
 ## Changelog
 
+### 0.0.130
+
+- publishdockerTask v5 added - using BcContainerHelper cmdlets
+
 ### 0.0.127
 
 - add allowPrerelease switch into installbcmodules v3 to allow installation of prerelease versions of modules
