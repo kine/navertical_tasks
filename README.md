@@ -64,6 +64,10 @@ After that, you can use the new tasks in your pipelines through visual designer 
 
 ## Changelog
 
+### 0.0.127
+
+- add allowPrerelease switch into installbcmodules v3 to allow installation of prerelease versions of modules
+
 ### 0.0.126
 
 - installbcmodules v3 - instal bccontainerhelper instead navcontainerhelper
