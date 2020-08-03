@@ -8,7 +8,7 @@
     "author": "Kine",
     "version": {
         "Major": 3,
-        "Minor": 0,
+        "Minor": 1,
         "Patch": 0
     },
     "visibility": [
@@ -40,6 +40,13 @@
             "defaultValue": "",
             "required": false,
             "helpMarkDown": "You could enter specific version of bccontainerhelper to use instead latest."
+        },
+        {
+            "name":"allowPreRelease",
+            "type":"boolean",
+            "label": "Allow PreRelease versions",
+            "defaultValue": false,
+            "helpMarkDown": "If checked, PreRelease version of modules are used"
         }
     ],
     "execution": {
