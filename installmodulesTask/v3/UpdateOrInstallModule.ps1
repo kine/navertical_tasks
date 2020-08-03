@@ -55,17 +55,17 @@ try{
     if ($UninstallOldVersions) {
         Write-Host "Uninstalling previous versions of NVRAppDevOps"
         if ($NVRAppDevOpsVersion) {
-            $Latest = Get-InstalledModule NVRAppDevOps -RequiredVersion $NVRAppDevOpsVersion
+            $Latest = Get-InstalledModule NVRAppDevOps -RequiredVersion $NVRAppDevOpsVersion -AllowPrerelease:$allowPreRelease
         } else {
-            $Latest = Get-InstalledModule NVRAppDevOps
+            $Latest = Get-InstalledModule NVRAppDevOps -AllowPrerelease:$allowPreRelease
         }
         Get-InstalledModule NVRAppDevOps -AllVersions | Where-Object {$_.Version -ne $Latest.Version} | Uninstall-Module -Force
 
         Write-Host "Uninstalling previous versions of bccontainerhelper"
         if ($bccontainerhelperVersion) {
-            $Latest = Get-InstalledModule bccontainerhelper -RequiredVersion $bccontainerhelperVersion
+            $Latest = Get-InstalledModule bccontainerhelper -RequiredVersion $bccontainerhelperVersion -AllowPrerelease:$allowPreRelease
         } else {
-            $Latest = Get-InstalledModule bccontainerhelper
+            $Latest = Get-InstalledModule bccontainerhelper -AllowPrerelease:$allowPreRelease
         }
         Get-InstalledModule bccontainerhelper -AllVersions | Where-Object {$_.Version -ne $Latest.Version} | Uninstall-Module -Force
     }
