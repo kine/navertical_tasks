@@ -29,7 +29,7 @@ try{
                 $OnlineModule = Find-Module $modulename -AllowPrerelease:$allowPreRelease
             }
             if ($OnlineModule.version -ne $ExistingModule[0].version) {
-                Write-Host "Newer version online exists: $($OnlineModule.version) - updating module $modulename AllowPrerelease:$($allowPreRelease)"
+                Write-Host "Newer version online exists: $($OnlineModule.version) (current is $($ExistingModule[0].version))- updating module $modulename AllowPrerelease:$($allowPreRelease)"
                 if ($requiredversion) {
                     update-module -Name $modulename -Force -RequiredVersion $requiredversion -AllowPrerelease:$allowPreRelease
                 } else {
@@ -57,17 +57,17 @@ try{
         if ($NVRAppDevOpsVersion) {
             $Latest = Get-InstalledModule NVRAppDevOps -RequiredVersion $NVRAppDevOpsVersion -AllowPrerelease:$allowPreRelease
         } else {
-            $Latest = Get-InstalledModule NVRAppDevOps -AllowPrerelease:$allowPreRelease
+            $Latest = Get-InstalledModule NVRAppDevOps -AllowPrerelease:$allowPreRelease -AllVersions | Sort-Object -Property Version -Descending | select-object -First 1
         }
-        Get-InstalledModule NVRAppDevOps -AllVersions | Where-Object {$_.Version -ne $Latest.Version} | Uninstall-Module -Force
+        Get-InstalledModule NVRAppDevOps -AllVersions | Where-Object {$_.Version -ne $Latest.Version} | ForEach-Object {Write-Host "Uninstalling NVRAppDevOps $($_.Version)"; $_ | Uninstall-Module -Force} 
 
         Write-Host "Uninstalling previous versions of bccontainerhelper"
         if ($bccontainerhelperVersion) {
             $Latest = Get-InstalledModule bccontainerhelper -RequiredVersion $bccontainerhelperVersion -AllowPrerelease:$allowPreRelease
         } else {
-            $Latest = Get-InstalledModule bccontainerhelper -AllowPrerelease:$allowPreRelease
+            $Latest = Get-InstalledModule bccontainerhelper -AllowPrerelease:$allowPreRelease -AllVersions | Sort-Object -Property Version -Descending | select-object -First 1
         }
-        Get-InstalledModule bccontainerhelper -AllVersions | Where-Object {$_.Version -ne $Latest.Version} | Uninstall-Module -Force
+        Get-InstalledModule bccontainerhelper -AllVersions | Where-Object {$_.Version -ne $Latest.Version} | ForEach-Object {Write-Host "Uninstalling bccontainerhelper $($_.Version)"; $_ | Uninstall-Module -Force} 
     }
 
 } finally {

@@ -64,6 +64,10 @@ After that, you can use the new tasks in your pipelines through visual designer 
 
 ## Changelog
 
+### 0.0.131
+
+- installmodulesTask fixed to not remove wrong version
+
 ### 0.0.130
 
 - publishdockerTask v5 added - using BcContainerHelper cmdlets
