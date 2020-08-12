@@ -64,6 +64,10 @@ After that, you can use the new tasks in your pipelines through visual designer 
 
 ## Changelog
 
+### 0.0.132
+
+- publishdockerTask v5 fixed no ArtifactUrl when container is old and not using artifacts (defaulting to latest stable OnPrem w1)
+
 ### 0.0.131
 
 - installmodulesTask fixed to not remove wrong version

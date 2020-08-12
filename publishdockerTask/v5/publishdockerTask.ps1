@@ -44,6 +44,10 @@ try {
             }
             Write-Host "Getting artifactUrl from $ContainerName on host $HostName"
             $ArtifactUrl = Invoke-Command -Session $pssession -ScriptBlock $Code -ArgumentList $ContainerName
+            if (-not $ArtifactUrl) {
+                Write-Host "Container isn't using artifacts (old container?). Defaulting to latest stable version of OnPrem w1"
+                $ArtifactUrl = Get-BCArtifactUrl -type OnPrem -country w1 -select Latest
+            }
             Write-Host "Artifact URL used: $ArtifactUrl"
             $InternalContainerName = 'BCPS'
             $RepoPath = $SourceFolder
