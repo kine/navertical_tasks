@@ -118,9 +118,13 @@ try {
     
         Write-Host "Getting dependencies after download"
         $AppOrder = Get-ALAppOrder -ContainerName $OrderContainerName -Path $SourceFolder -Recurse:$Recurse
-    
+        Write-Verbose "Detected dependencies:"
+        foreach ($App in $AppOrder) {
+            Write-Verbose "$($App.name) $($App.AppPath)"
+        }
         Write-Host "Publishing and Installing the apps..."
         foreach ($App in ($AppOrder |where-object {$_.publisher -ne 'Microsoft'})) {
+            Write-Host "--- $($App.name)"
             if ($App.AppPath -like '*.app') {
                 $AppFile = $App.AppPath
             }
