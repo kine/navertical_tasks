@@ -17,7 +17,7 @@ try {
     $Recurse = Get-VstsInput -Name 'Recurse' -AsBool -Default $false
     $UseDevEndpoint = Get-VstsInput -Name 'UseDevEndpoint' -AsBool -Default $false
     $AppDownloadScript = Get-VstsInput -Name 'AppDownloadScript' -Default ''
-    $IncludeAppFiles = Get-VstsInput -Name 'IncludeAppFiles' -Default $false
+    $IncludeAppFiles = Get-VstsInput -Name 'IncludeAppFiles' -AsBool -Default $false
 
     Write-Host "Importing module NVRAppDevOps"
     Import-Module NVRAppDevOps -DisableNameChecking
