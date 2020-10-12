@@ -17,6 +17,7 @@ try {
     $Recurse = Get-VstsInput -Name 'Recurse' -AsBool -Default $false
     $UseDevEndpoint = Get-VstsInput -Name 'UseDevEndpoint' -AsBool -Default $false
     $AppDownloadScript = Get-VstsInput -Name 'AppDownloadScript' -Default ''
+    $IncludeAppFiles = Get-VstsInput -Name 'IncludeAppFiles' -Default $false
 
     Write-Host "Importing module NVRAppDevOps"
     Import-Module NVRAppDevOps -DisableNameChecking
@@ -117,7 +118,7 @@ try {
         }
     
         Write-Host "Getting dependencies after download"
-        $AppOrder = Get-ALAppOrder -ContainerName $OrderContainerName -Path $SourceFolder -Recurse:$Recurse
+        $AppOrder = Get-ALAppOrder -ContainerName $OrderContainerName -Path $SourceFolder -Recurse:$Recurse -IncludeAppFiles $IncludeAppFiles
         Write-Verbose "Detected dependencies:"
         foreach ($App in $AppOrder) {
             Write-Verbose "$($App.name) $($App.AppPath)"
