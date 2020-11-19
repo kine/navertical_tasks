@@ -205,7 +205,23 @@ try {
                             Write-Host "Getting info about $AppFile"
                             Get-NAVAppInfo -Path $AppFile
                         }
-                        Invoke-ScriptInBcContainer -containerName $ContainerName -scriptblock $Script -argumentList (Get-BcContainerPath -containerName $ContainerName -path $AppFile)
+                        $ContainerFileName = Get-BcContainerPath -containerName $ContainerName -path $AppFile
+                        If (-not $ContainerFileName) {
+                            $FileName = Split-Path $AppFile -Leaf
+                            $ContainerFileName = Join-Path 'c:\run\my' $FileName
+                            Copy-FileToBcContainer -containerName $ContainerName -localPath $AppFile -containerPath $ContainerFileName | Out-Null
+                        }
+                        $AppInfo = Invoke-ScriptInBcContainer -containerName $ContainerName -scriptblock $Script -argumentList $ContainerFileName
+                        if (-not (Get-BcContainerPath -containerName $ContainerName -path $AppFile)) {
+                            $Script = {
+                                param($AppFile)
+                                Write-Host "Removing $AppFile"
+                                remove-item -Path $AppFile -Force
+                            }
+                            Invoke-ScriptInBcContainer -containerName $ContainerName -scriptblock $Script -argumentList $ContainerFileName | Out-Null
+                        }
+                        return $AppInfo
+
                     }
                     $AppFileInfo = Invoke-Command -Session $pssession -ScriptBlock $Code -ArgumentList $ContainerName,$TargetFileName
 
