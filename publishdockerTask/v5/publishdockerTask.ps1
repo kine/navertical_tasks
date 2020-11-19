@@ -142,7 +142,7 @@ try {
             }
             $dockerapp = Invoke-Command -Session $pssession -ScriptBlock $Code -ArgumentList $ContainerName,$App
     
-            $install = -not $dockerapp
+            $install = -not ($dockerapp | where-object {$_.IsInstalled})
             if ($AppFile) {
                 if ($install) {
                     Write-Host "App not exists on server, will install by default"
