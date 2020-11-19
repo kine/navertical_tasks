@@ -205,7 +205,7 @@ try {
                             Write-Host "Getting info about $AppFile"
                             Get-NAVAppInfo -Path $AppFile
                         }
-                        Invoke-ScriptInBcContainer -containerName $ContainerName -scriptblock $Script -argumentList $AppFile
+                        Invoke-ScriptInBcContainer -containerName $ContainerName -scriptblock $Script -argumentList (Get-BcContainerPath -containerName $ContainerName -path $AppFile)
                     }
                     $AppFileInfo = Invoke-Command -Session $pssession -ScriptBlock $Code -ArgumentList $ContainerName,$TargetFileName
 
