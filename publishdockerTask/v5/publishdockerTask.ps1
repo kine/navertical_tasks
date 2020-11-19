@@ -142,8 +142,7 @@ try {
             }
             $dockerapp = Invoke-Command -Session $pssession -ScriptBlock $Code -ArgumentList $ContainerName,$App
     
-            $install = -not ($dockerapp | where-object {$_.IsInstalled})
-            $Upgrade = [bool]$dockerapp
+            $install = -not $dockerapp
             if ($AppFile) {
                 if ($install) {
                     Write-Host "App not exists on server, will install by default"
@@ -156,7 +155,6 @@ try {
                                             -skipVerification:$SkipVerify `
                                             -sync `
                                             -install:$install `
-                                            -upgrade:$Upgrade `
                                             -syncMode $SyncMode `
                                             -tenant $Tenant `
                                             -scope $Scope `
@@ -182,22 +180,20 @@ try {
                             $SyncMode,
                             $Tenant,
                             $Scope,
-                            $UseDevEndpoint,
-                            $Upgrade
+                            $UseDevEndpoint
                         )
                         Publish-BcContainerApp -containerName $ContainerName `
                                                 -appFile $AppFile `
                                                 -skipVerification:$SkipVerify `
                                                 -sync `
                                                 -install:$install `
-                                                -upgrade:$Upgrade `
                                                 -syncMode $SyncMode `
                                                 -tenant $Tenant `
                                                 -scope $Scope `
                                                 -useDevEndpoint:$UseDevEndpoint
                         Remove-Item -Path $AppFile -Force
                     }
-                    Invoke-Command -Session $pssession -ScriptBlock $Code -ArgumentList $ContainerName,$TargetFileName,$SkipVerify,$install,$SyncMode,$Tenant,$Scope,$UseDevEndpoint,$Upgrade
+                    Invoke-Command -Session $pssession -ScriptBlock $Code -ArgumentList $ContainerName,$TargetFileName,$SkipVerify,$install,$SyncMode,$Tenant,$Scope,$UseDevEndpoint
                 }
             
                 if ($dockerapp) {
