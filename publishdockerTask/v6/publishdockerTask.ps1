@@ -250,7 +250,7 @@ try {
                                             -containerName $ContainerName `
                                             -tenant $Tenant `
                                             -tenantSpecificProperties | where-object {($_.Name -eq $AppFileInfo.Name) -and ($_.Version -eq $AppFileInfo.Version)}
-                        if ($AppInfo.NeedsUpgrade) {
+                        if (($AppInfo.NeedsUpgrade) -or ((-not [String]::IsNullOrEmpty($AppInfo.ExtensionDataVersion)) -and ($AppInfo.ExtensionDataVersion -ne $AppFileInfo.Version)) {
                             Write-Host "Upgrading app data"
                             Start-BcContainerAppDataUpgrade -containerName $ContainerName `
                                                             -tenant $Tenant `
