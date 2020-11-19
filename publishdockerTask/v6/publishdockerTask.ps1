@@ -149,7 +149,7 @@ try {
                         Write-Host "Getting info about $AppFile"
                         Get-NAVAppInfo -Path $AppFile
                     }
-                    $AppFileInfo = Invoke-ScriptInBcContainer -containerName $ContainerName -scriptblock $Script -argumentList $AppFile
+                    $AppFileInfo = Invoke-ScriptInBcContainer -containerName $ContainerName -scriptblock $Script -argumentList (Get-BcContainerPath -containerName $ContainerName -path $AppFile)
 
                     Publish-BcContainerApp -containerName $ContainerName `
                                             -appFile $AppFile `
