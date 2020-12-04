@@ -85,6 +85,7 @@ try {
         #                  -Tenant $Tenant
         Write-Host "Checking availability of dependencies ($($AppOrder.Count))..."
         foreach ($App in ($AppOrder |where-object {$_.publisher -ne 'Microsoft'})) {
+            Write-Host "Processing $($App.name)"
             if ($App.AppPath -like '*.app') {
                 $AppFile = $App.AppPath
             }
@@ -111,7 +112,7 @@ try {
                 if (-not $dockerapp) {
                     Write-Host "$($App.name) found as file $($App.AppPath)"
                 } else {
-                    Write-Host "$($App.name) $($dockerapp.version) found already installed"
+                    Write-Host "$($App.name) $($dockerapp.version) found already installed (file version $($App.version))"
                     if ([version]$dockerapp.version -lt [version]$App.version) {
                         Write-Host "Version $($App.version) required, trying to download..."
                         Download-ALApp -name $App.name -publisher $App.publisher -version $App.version -targetPath $SourceFolder -AppDownloadScript $AppDownloadScript
