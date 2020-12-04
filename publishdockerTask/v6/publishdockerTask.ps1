@@ -113,7 +113,9 @@ try {
                     Write-Host "$($App.name) found as file $($App.AppPath)"
                 } else {
                     Write-Host "$($App.name) $($dockerapp.version) found already installed (file version $($App.version))"
-                    if (([version]($dockerapp.version)) -lt ([version]$App.version)) {
+                    $DockerVersion = [version]($dockerapp.version)
+                    $AppVersion = [version]($App.version)
+                    if (($DockerVersion -lt $AppVersion) {
                         Write-Host "Version $($App.version) required, trying to download..."
                         Download-ALApp -name $App.name -publisher $App.publisher -version $App.version -targetPath $SourceFolder -AppDownloadScript $AppDownloadScript
                         $AppFile = (Get-ChildItem -Path $SourceFolder -Filter "$($App.publisher)_$($App.name)_*.app" | Select-Object -First 1).FullName
