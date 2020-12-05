@@ -125,7 +125,7 @@ try {
                     Write-Verbose "AppVersion type $($AppVersion.GetType().Name)"
                     if ($DockerVersion -lt $AppVersion) {
                         Write-Host "Version $($App.version) required, trying to download..."
-                        Download-ALApp -name $App.name -publisher $App.publisher -version $App.version -targetPath $SourceFolder -AppDownloadScript $AppDownloadScript
+                        Download-ALApp -name $App.name -publisher $App.publisher -version $AppVersion -targetPath $SourceFolder -AppDownloadScript $AppDownloadScript
                         $AppFile = (Get-ChildItem -Path $SourceFolder -Filter "$($App.publisher)_$($App.name)_*.app" | Select-Object -First 1).FullName
                         $App.AppPath = $AppFile               
                     }
