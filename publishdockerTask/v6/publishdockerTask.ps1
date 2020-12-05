@@ -119,6 +119,10 @@ try {
                     } else {
                         $AppVersion = [version]($App.version)
                     }
+                    Write-Verbose "dockerapp.version type $($dockerapp.version.GetType().Name)"
+                    Write-Verbose "DockerVersion type $($DockerVersion.GetType().Name)"
+                    Write-Verbose "App.version type $($App.version.GetType().Name)"
+                    Write-Verbose "AppVersion type $($AppVersion.GetType().Name)"
                     if ($DockerVersion -lt $AppVersion) {
                         Write-Host "Version $($App.version) required, trying to download..."
                         Download-ALApp -name $App.name -publisher $App.publisher -version $App.version -targetPath $SourceFolder -AppDownloadScript $AppDownloadScript
