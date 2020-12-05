@@ -114,8 +114,8 @@ try {
                 } else {
                     Write-Host "$($App.name) $($dockerapp.version) found already installed (file version $($App.version))"
                     $DockerVersion = [version]($dockerapp.version)
-                    if ($App.version.Major) {
-                        $AppVersion = $App.version
+                    if ($App.version.GetType().Name -eq 'PSCustomObject') {
+                        $AppVersion = [version]::new($App.version.Major,$App.version.Minor,$App.version.Build,$App.version.Revision)
                     } else {
                         $AppVersion = [version]($App.version)
                     }
