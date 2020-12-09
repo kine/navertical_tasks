@@ -97,7 +97,7 @@ try {
                     $ContainerName,
                     $App
                 )
-                Get-BcContainerAppInfo -containerName $ContainerName -tenantSpecificProperties -sort None | where-object { $_.Name -eq $App.name }
+                Get-BcContainerAppInfo -containerName $ContainerName -tenantSpecificProperties -sort None | where-object { $_.Name -eq $App.name } | Sort-Object -Property version | Select-Object -Last 1
             }
             $dockerapp = Invoke-Command -Session $pssession -ScriptBlock $Code -ArgumentList $ContainerName,$App
             if ((-not $AppFile) -and (-not $dockerapp)) {
