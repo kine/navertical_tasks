@@ -63,6 +63,8 @@ After that, you can use the new tasks in your pipelines through visual designer 
 ![image](images/signPipeline.png)
 
 ## Changelog
+### 0.0.159
+- createdockerTask v5 added with imageName parameter to generate the image
 
 ### 0.0.133
 
