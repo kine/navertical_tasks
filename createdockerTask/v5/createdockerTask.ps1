@@ -60,7 +60,7 @@ try{
         Init-ALEnvironment `
             -ContainerName $containername `
             -ArtifactUrl $artifactUrl `
-            -imageName $imagename `
+            -ImageName $imagename `
             -LicenseFile $licensefile `
             -Build 'true' `
             -Username $username `
