@@ -53,9 +53,6 @@ try{
                               -ArtifactUrl $artifactUrl `
                               -EnableCodeCop $enablecop `
                               -FailOn $failon `
-                              -Auth $auth `
-                              -Username $username `
-                              -Password $password `
                               -AppDownloadScript $appdownloadscript `
                               -EnableAppSourceCop $enableAppSourcecop `
                               -EnablePerTenantExtensionCop $enablePerTenantExtensioncop `
