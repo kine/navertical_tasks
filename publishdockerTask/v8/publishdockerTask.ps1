@@ -51,7 +51,8 @@ try {
             }
             Write-Host "Artifact URL used: $ArtifactUrl"
         }
-        Write-Host "Getting app dependencies and order with Artifact $ArtifactUrl"
+        Write-Host "Getting app dependencies and order"
+        Write-Host "Get-ALAppOrder -ArtifactUrl $ArtifactUrl -Path $SourceFolder -Recurse:$Recurse"
         $AppOrder = Get-ALAppOrder -ArtifactUrl $ArtifactUrl -Path $SourceFolder -Recurse:$Recurse
 
         Write-Host "Checking availability of dependencies ($($AppOrder.Count))..."
