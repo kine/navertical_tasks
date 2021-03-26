@@ -63,6 +63,9 @@ After that, you can use the new tasks in your pipelines through visual designer 
 ![image](images/signPipeline.png)
 
 ## Changelog
+
+### 0.0.162
+- publishbcappdocker v8 added which uses artifact to get app info - no need to create container
 ### 0.0.159
 - createdockerTask v5 added with imageName parameter to generate the image
 
