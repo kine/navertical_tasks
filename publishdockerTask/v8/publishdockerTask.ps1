@@ -71,7 +71,7 @@ try {
                 )
                 Get-BcContainerAppInfo -containerName $ContainerName -tenantSpecificProperties -sort None -Tenant $Tenant | where-object { $_.Name -eq $App.name }
             }
-            $dockerapp = Invoke-Command -Session $pssession -ScriptBlock $Code -ArgumentList $ContainerName,$Tenant,$App
+            $dockerapp = Invoke-Command -Session $pssession -ScriptBlock $Code -ArgumentList $ContainerName,$Tenant,$App  | Sort-Object -Property Version | Select-Object -Last 1
             if ((-not $AppFile) -and (-not $dockerapp)) {
                 Write-Host "App $($App.name) from $($App.publisher) not found."
                 if ($AppDownloadScript) {
