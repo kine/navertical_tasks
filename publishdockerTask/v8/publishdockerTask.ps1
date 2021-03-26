@@ -34,7 +34,7 @@ try {
     try {
 
         if (($HostName -eq '.') -and (Get-NavContainerPath -containerName $ContainerName -path $SourceFolder)) {
-            $OrderContainerName = $ContainerName
+            $ArtifactUrl = Get-BCContainerArtifactUrl $ContainerName
         } else {
             $Code = {
                 param(
@@ -51,7 +51,7 @@ try {
             }
             Write-Host "Artifact URL used: $ArtifactUrl"
         }
-        Write-Host 'Getting app dependencies and order'
+        Write-Host "Getting app dependencies and order with Artifact $ArtifactUrl"
         $AppOrder = Get-ALAppOrder -ArtifactUrl $ArtifactUrl -Path $SourceFolder -Recurse:$Recurse
 
         Write-Host "Checking availability of dependencies ($($AppOrder.Count))..."
