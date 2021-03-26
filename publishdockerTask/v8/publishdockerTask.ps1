@@ -203,7 +203,7 @@ try {
                         return $AppInfo
 
                     }
-                    $AppFileInfo = Invoke-Command -Session $pssession -ScriptBlock $Code -ArgumentList $ContainerName,$TargetFileName
+                    $AppFileInfo = Invoke-Command -Session $pssession -ScriptBlock $Code -ArgumentList $ContainerName,$TargetFileName | sort-object -Property Version |Select-Object -Last 1
                     $dockerappInfo = $dockerapp | Where-Object {($_.Name -eq $AppFileInfo.Name) -and `
                                                                 ($_.Publisher -eq $AppFileInfo.Publisher) -and `
                                                                 ([Version]$_.Version -ge [version]$AppFileInfo.Version)}
