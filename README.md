@@ -64,9 +64,16 @@ After that, you can use the new tasks in your pipelines through visual designer 
 
 ## Changelog
 
+### 0.0.168
+
+- CreateBCAppNuspec v 3 added which uses artifact to get app info - no need to create container
+
 ### 0.0.162
+
 - publishbcappdocker v8 added which uses artifact to get app info - no need to create container
+
 ### 0.0.159
+
 - createdockerTask v5 added with imageName parameter to generate the image
 
 ### 0.0.133
