@@ -109,7 +109,7 @@ try {
                 $AppFile = $App.AppPath
             }
             else {
-                $AppFile = (Get-ChildItem -Path $SourceFolder -Filter "$($App.publisher)_$($App.name)_*.app" | Select-Object -First 1).FullName
+                $AppFile = (Get-ChildItem -Path $SourceFolder -Filter "$($App.publisher)_$($App.name)_*.app" | Select-Object -Last 1).FullName
             }
 
             $Code={
