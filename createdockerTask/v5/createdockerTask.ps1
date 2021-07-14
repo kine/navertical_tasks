@@ -25,7 +25,8 @@ try{
     $AlwaysPull = Get-VstsInput -Name 'alwaysPull' -AsBool
 
     if ($customscripts) {
-        $customScriptsObj = $customscripts | ConvertFrom-Json
+        Write-Host "Deserializing custom scripts input"
+        $customScriptsObj = [System.Management.Automation.PSSerializer]::Deserialize($customscripts)
     }
     if ($isolation -eq 'default') {
         $isolation = ''
