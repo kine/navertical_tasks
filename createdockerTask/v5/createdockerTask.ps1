@@ -24,6 +24,9 @@ try{
     $UseBestOS = Get-VstsInput -Name 'useBestContainerOS' -AsBool
     $AlwaysPull = Get-VstsInput -Name 'alwaysPull' -AsBool
 
+    if ($customscripts) {
+        $customScriptsObj = $customscripts | ConvertFrom-Json
+    }
     if ($isolation -eq 'default') {
         $isolation = ''
     }
@@ -78,7 +81,7 @@ try{
             -alwaysPull $AlwaysPull `
             -IncludeCSide $includeCSide `
             -optionalParameters $optionalparams `
-            -customScripts $customscripts
+            -customScripts $customScriptsObj
 
     }
         

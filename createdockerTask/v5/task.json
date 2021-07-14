@@ -8,7 +8,7 @@
     "author": "Kine",
     "version": {
         "Major": 5,
-        "Minor": 3,
+        "Minor": 4,
         "Patch": 0
     },
     "visibility": [
@@ -173,11 +173,11 @@
         },
         {
             "name": "customscripts",
-            "type": "string",
-            "label": "Additional custom scripts",
+            "type": "",
+            "label": "Additional custom scripts (json)",
             "defaultValue": "",
             "required": false,
-            "helpMarkDown": "Add your own scripts for creating the container"
+            "helpMarkDown": "Add your own scripts for creating the container (pass as json)"
         }
 
 
