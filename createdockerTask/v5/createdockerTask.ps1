@@ -20,6 +20,7 @@ try{
     $includeCSide = Get-VstsInput -Name 'includeCSide' -AsBool
     $optionalparams = Get-VstsInput -Name 'optionalparams' -Default ''
     $isolation = Get-VstsInput -Name 'isolation' -Default ''
+    $customscripts = Get-VstsInput -Name 'customscripts' -Default ''
     $UseBestOS = Get-VstsInput -Name 'useBestContainerOS' -AsBool
     $AlwaysPull = Get-VstsInput -Name 'alwaysPull' -AsBool
 
@@ -76,7 +77,9 @@ try{
             -useBestContainerOS:$UseBestOS `
             -alwaysPull $AlwaysPull `
             -IncludeCSide $includeCSide `
-            -optionalParameters $optionalparams
+            -optionalParameters $optionalparams `
+            -customScripts $customscripts
+
     }
         
 } finally {

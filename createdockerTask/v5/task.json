@@ -8,7 +8,7 @@
     "author": "Kine",
     "version": {
         "Major": 5,
-        "Minor": 2,
+        "Minor": 3,
         "Patch": 0
     },
     "visibility": [
@@ -170,6 +170,14 @@
             "defaultValue": "",
             "required": false,
             "helpMarkDown": "Add your own parameters for creating the container"
+        },
+        {
+            "name": "customscripts",
+            "type": "string",
+            "label": "Additional custom scripts",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "Add your own scripts for creating the container"
         }
 
 
