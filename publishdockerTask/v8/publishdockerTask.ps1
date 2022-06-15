@@ -61,6 +61,18 @@ try {
                 $AppFile = $App.AppPath
             }
             else {
+                $AppFiles = (Get-ChildItem -Path $SourceFolder -Filter "$($App.publisher)_$($App.name)_*.app").FullName
+                foreach ($AppFile in $AppFiles) {
+                    if ($AppFile -match '.+_(\d+\.\d+.\d+.\d+).app') {
+                        $Version =[Version]$Matches[1]
+                    } else {
+                        $Version =''
+                    }
+                    if($version -and ($Version -lt $App.version)) {
+                        Write-Host "Version of $AppFile is less than requested $($App.version), removing"
+                        Remove-item -Path $AppFile -Force
+                    }
+                }
                 $AppFile = (Get-ChildItem -Path $SourceFolder -Filter "$($App.publisher)_$($App.name)_*.app" | Select-Object -First 1).FullName
             }
             $Code={
