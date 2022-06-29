@@ -81,7 +81,7 @@ try {
                     $Tenant,
                     $App
                 )
-                Get-BcContainerAppInfo -containerName $ContainerName -tenantSpecificProperties -sort None -Tenant $Tenant | where-object { $_.Name -eq $App.name }
+                Get-BcContainerAppInfo -containerName $ContainerName -tenantSpecificProperties -sort None -Tenant $Tenant -useOldFormat true | where-object { $_.Name -eq $App.name }
             }
             $dockerapp = Invoke-Command -Session $pssession -ScriptBlock $Code -ArgumentList $ContainerName,$Tenant,$App  | Sort-Object -Property Version | Select-Object -Last 1
             if ((-not $AppFile) -and (-not $dockerapp)) {
@@ -130,7 +130,7 @@ try {
                     $Tenant,
                     $App
                 )
-                Get-BcContainerAppInfo -containerName $ContainerName -tenantSpecificProperties -sort None -Tenant $Tenant | where-object { $_.Name -eq $App.name }
+                Get-BcContainerAppInfo -containerName $ContainerName -tenantSpecificProperties -sort None -Tenant $Tenant -useOldFormat true | where-object { $_.Name -eq $App.name }
             }
             $dockerapp = Invoke-Command -Session $pssession -ScriptBlock $Code -ArgumentList $ContainerName,$Tenant,$App
     
@@ -154,7 +154,8 @@ try {
                     $AppInfo = Get-BcContainerAppInfo `
                                             -containerName $ContainerName `
                                             -tenant $Tenant `
-                                            -tenantSpecificProperties | where-object {($_.Name -eq $AppFileInfo.Name) -and ($_.Version -eq $AppFileInfo.Version)}
+                                            -tenantSpecificProperties `
+                                            -useOldFormat true | where-object {($_.Name -eq $AppFileInfo.Name) -and ($_.Version -eq $AppFileInfo.Version)}
                     if ($AppInfo.NeedsUpgrade) {
                         Write-Host "Upgrading app data"
                         Start-BcContainerAppDataUpgrade -containerName $ContainerName `
@@ -165,7 +166,8 @@ try {
                     $AppInfo = Get-BcContainerAppInfo `
                                             -containerName $ContainerName `
                                             -tenant $Tenant `
-                                            -tenantSpecificProperties | where-object {($_.Name -eq $AppFileInfo.Name) -and ($_.Version -eq $AppFileInfo.Version)}
+                                            -tenantSpecificProperties `
+                                            -useOldFormat true | where-object {($_.Name -eq $AppFileInfo.Name) -and ($_.Version -eq $AppFileInfo.Version)}
                     if (-not $AppInfo.IsInstalled) {
                         Write-Host "Installing app"
                         Install-BcContainerApp  -containerName $ContainerName `
@@ -243,7 +245,8 @@ try {
                         $AppInfo = Get-BcContainerAppInfo `
                                             -containerName $ContainerName `
                                             -tenant $Tenant `
-                                            -tenantSpecificProperties | where-object {($_.Name -eq $AppFileInfo.Name) -and ($_.Version -eq $AppFileInfo.Version)}
+                                            -tenantSpecificProperties `
+                                            -useOldFormat true | where-object {($_.Name -eq $AppFileInfo.Name) -and ($_.Version -eq $AppFileInfo.Version)}
                         if (($AppInfo.NeedsUpgrade) -or ((-not [String]::IsNullOrEmpty($AppInfo.ExtensionDataVersion)) -and ($AppInfo.ExtensionDataVersion -ne $AppFileInfo.Version))) {
                             Write-Host "Upgrading app data"
                             Start-BcContainerAppDataUpgrade -containerName $ContainerName `
@@ -254,7 +257,8 @@ try {
                         $AppInfo = Get-BcContainerAppInfo `
                                                 -containerName $ContainerName `
                                                 -tenant $Tenant `
-                                                -tenantSpecificProperties | where-object {($_.Name -eq $AppFileInfo.Name) -and ($_.Version -eq $AppFileInfo.Version)}
+                                                -tenantSpecificProperties `
+                                                -useOldFormat true | where-object {($_.Name -eq $AppFileInfo.Name) -and ($_.Version -eq $AppFileInfo.Version)}
                         if (-not $AppInfo.IsInstalled) {
                             Write-Host "Installing app"
                             Install-BcContainerApp  -containerName $ContainerName `
@@ -277,7 +281,7 @@ try {
                             $ContainerName,
                             $App
                         )
-                        Get-BcContainerAppInfo -containerName $ContainerName -tenantSpecificProperties -sort None | where-object { $_.Name -eq $App.name } | Sort-Object -Property "Version" | Select-Object -Unique -Property *
+                        Get-BcContainerAppInfo -containerName $ContainerName -tenantSpecificProperties -sort None -useOldFormat true | where-object { $_.Name -eq $App.name } | Sort-Object -Property "Version" | Select-Object -Unique -Property *
                     }
                     $dockerapp = Invoke-Command -Session $pssession -ScriptBlock $Code -ArgumentList $ContainerName,$App
 
