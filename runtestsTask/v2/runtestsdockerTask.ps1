@@ -25,8 +25,8 @@ try{
     if ($createnewcompany) {
         $TestCompanyName = 'NVRTask_Tests'
         New-CompanyInBCContainer -containerName $containername -tenant $tenant -companyName $TestCompanyName
-        Write-Host "Running Init Company Codeunit"
-        Invoke-NavContainerCodeunit -containerName $containername -codeunitId 2 -methodName "InitSetupTables"
+        Write-Host "Running Init Company Codeunit in $TestCompanyName"
+        Invoke-NavContainerCodeunit -containerName $containername -codeunitId 2 -methodName "InitSetupTables" -CompanyName $TestCompanyName
     }
     $result=Run-ALTestInContainer -ContainerName $containername -detailed -AzureDevOps $resultonerror -XUnitResultFileName "$FullPath" -testSuite $testsuite -Auth $auth -Username $username -Password $password -tenant $tenant -extensionId $extensionid -restartContainerAndRetry:$restartContainerAndRetry -companyName $TestCompanyName -returnTrueIfAllPassed
     if (($resultonerror -eq 'error') -and ($result -eq $false)) {
