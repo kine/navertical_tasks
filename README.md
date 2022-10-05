@@ -64,6 +64,10 @@ After that, you can use the new tasks in your pipelines through visual designer 
 
 ## Changelog
 
+### 0.0.179
+
+- Run Codeunit 2 when new company created during RuntestsTask (preventing side effects of some apps initing data on first connection)
+
 ### 0.0.168
 
 - CreateBCAppNuspec v 3 added which uses artifact to get app info - no need to create container
