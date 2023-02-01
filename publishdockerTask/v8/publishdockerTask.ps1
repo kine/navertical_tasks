@@ -115,8 +115,23 @@ try {
             Write-Verbose "$($App.name) $($App.AppPath)"
         }
         Write-Host "Publishing and Installing the apps..."
+        $Code={
+            param(
+                $ContainerName,
+                $Tenant
+            )
+            Get-BcContainerAppInfo -containerName $ContainerName -tenantSpecificProperties -sort None -Tenant $Tenant
+        }
+        $existingdockerapps = Invoke-Command -Session $pssession -ScriptBlock $Code -ArgumentList $ContainerName,$Tenant
+
         foreach ($App in ($AppOrder |where-object {$_.publisher -ne 'Microsoft'})) {
             Write-Host "--- $($App.name)"
+            $existingdockerapp = $existingdockerapps | where-object { ($_.Name -eq $App.name) -and ($_.Version -eq $App.version)}
+            if ($existingdockerapp -and $existingdockerapp.IsInstalled) {
+                Write-Host "App $($App.name) $($App.version) already installed"
+                continue
+            }
+
             if ($App.AppPath -like '*.app') {
                 $AppFile = $App.AppPath
             }
