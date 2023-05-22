@@ -19,7 +19,7 @@ try {
     $Description = Get-VstsInput -Name 'Description' -Default ''
     $Copyright = Get-VstsInput -Name 'Copyright' -Default ''
     $Tags = Get-VstsInput -Name 'Tags' -Default ''
-    $IncludeBaseApp = Get-VstsInput -Name 'IncludeBaseApp' -Default $false
+    $IncludeBaseApp = Get-VstsInput -Name 'IncludeBaseApp' -AsBool
     
     set-location $env:SYSTEM_DEFAULTWORKINGDIRECTORY
 
