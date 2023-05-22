@@ -2,30 +2,32 @@
     "manifestVersion": 1,
     "id": "naverticaltasks",
     "name": "NaverticAL Build and Release Tasks for Business Central",
-    "version": "0.0.0",
+    "version": "1.0.0",
     "publisher": "Kine",
     "targets": [
         {
             "id": "Microsoft.VisualStudio.Services"
         }
-    ],    
+    ],
     "description": "Tasks for building/releasing for Microsoft Dynamics 365 Business Central.",
     "categories": [
         "Azure Pipelines"
     ],
     "icons": {
-        "default": "images/navertica_logo_kruhpng.png"        
+        "default": "images/navertica_logo_kruhpng.png"
     },
     "content": {
         "details": {
-          "path": "overview.md"
+            "path": "overview.md"
         },
         "license": {
-          "path": "license.txt"
+            "path": "license.txt"
         }
     },
-    "screenshots":[
-        {"path":"images/testPipeline.png"}
+    "screenshots": [
+        {
+            "path": "images/testPipeline.png"
+        }
     ],
     "files": [
         {
@@ -65,12 +67,11 @@
             "path": "images",
             "addressable": true
         }
-
     ],
     "links": {
         "home": {
             "uri": "https://github.com/kine/navertical_tasks"
-          },
+        },
         "getstarted": {
             "uri": "https://github.com/kine/navertical_tasks"
         },
@@ -85,7 +86,6 @@
         "type": "git",
         "uri": "https://github.com/kine/navertical_tasks.git"
     },
-
     "contributions": [
         {
             "id": "047393e1-82e4-4d24-8275-237409bb378e",

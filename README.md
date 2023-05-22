@@ -25,7 +25,7 @@ This package includes tasks you can use in your Build/Release pipelines for Micr
 On your Azure DevOps account go to the Marketplace, find the extension and install it.
 After that, you can use the new tasks in your pipelines through visual designer or yaml, as you wish. Just define the parameters and run the pipeline.
 
-## Example of Release Pipeline to create container, publish the app, test it...
+## Example of Release Pipeline to create container, publish the app, test it
 
 - Install or update scripts
 - Create container
@@ -37,21 +37,21 @@ After that, you can use the new tasks in your pipelines through visual designer 
 
 ![image](images/testPipeline.png)
 
-## Example of Release Pipeline to release the app into QA container...
+## Example of Release Pipeline to release the app into QA container
 
 - Install or update scripts
 - Publish Main App to container
 
 ![image](images/publishPipeline.png)
 
-## Example of Release Pipeline to release the app online...
+## Example of Release Pipeline to release the app online
 
 - Install or update scripts
 - Publish App to tenant
 
 ![image](images/publishOnlinePipeline.png)
 
-## Example of Release Pipeline to sign the app...
+## Example of Release Pipeline to sign the app
 
 - Install or update scripts
 - Download secure file
@@ -63,6 +63,11 @@ After that, you can use the new tasks in your pipelines through visual designer 
 ![image](images/signPipeline.png)
 
 ## Changelog
+
+### 1.0.0
+
+- Stabilized release
+- Added createALNuSpec:4 with switch to include Base application dependency (preview)
 
 ### 0.0.179
 
@@ -155,7 +160,7 @@ After that, you can use the new tasks in your pipelines through visual designer 
 ### 0.0.95
 
 - v2 of runtestsTask to support new parameters of navcontainerhelper function (extensionID, restartandretry)
-- v2 of createdockerTask to support new parameter TestLibraryOnly to speed up container creation 
+- v2 of createdockerTask to support new parameter TestLibraryOnly to speed up container creation
 
 ### 0.0.94
 
