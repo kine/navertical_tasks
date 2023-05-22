@@ -5,8 +5,9 @@ pool:
 #Your build pipeline references an undefined variable named ‘Extension.Version’. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
 
 steps:
-- task: ms-devlabs.vsts-developer-tools-build-tasks.tfx-installer-build-task.TfxInstaller@4
-  displayName: 'Use Node CLI for Azure DevOps (tfx-cli): v0.6.x'
+- task: TfxInstaller@4
+  inputs:
+    version: '>=v0.x'
 
 - task: ms-devlabs.vsts-developer-tools-build-tasks.extension-version-build-task.ExtensionVersion@1
   displayName: 'Query Extension Version: Kine.naverticaltasks'
