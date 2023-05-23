@@ -70,6 +70,7 @@ try {
     else {
         import-module (Get-BCModulePathFromArtifact -artifactPath ((Download-Artifacts -artifactUrl $ArtifactUrl -includePlatform)[1]))
         $AppInfo = get-navappinfo -Path $OneAppFile
+        Write-Host "Dependencies in the app: $($AppInfo.Dependencies)"
     }
     if (-not $Description) {
         $Description = $AppInfo.Description
