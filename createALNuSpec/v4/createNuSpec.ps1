@@ -78,7 +78,8 @@ try {
     $AppVersion = "$($AppInfo.Version.Major).$($AppInfo.Version.Minor).$($AppInfo.Version.Build).$($AppInfo.Version.Revision)"
     Write-Host "Creating NuSpec file for $OneAppFile"
     $id = "$($AppInfo.publisher)_$($AppInfo.name)"
-    Write-Verbose @"New-ALNuSpec -AppFile $OneAppFile `
+    Write-Verbose @"
+    New-ALNuSpec -AppFile $OneAppFile `
         -AppName $($AppInfo.Name) `
         -Publisher $($AppInfo.Publisher) `
         -AppVersion $AppVersion `
