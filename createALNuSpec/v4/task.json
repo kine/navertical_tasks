@@ -9,7 +9,7 @@
     "preview": "true",
     "version": {
         "Major": 4,
-        "Minor": 4,
+        "Minor": 5,
         "Patch": 0
     },
     "visibility": [
@@ -125,6 +125,12 @@
             "type": "boolean",
             "label": "Include Base Application",
             "helpMarkDown": "If include Microsoft Appplication dependency into dependencies."
+        },
+        {
+            "name": "BaseAppVersion",
+            "type": "string",
+            "label": "Base Application Version",
+            "helpMarkDown": "Will add specific base app version as a dependency"
         }
     ],
     "execution": {

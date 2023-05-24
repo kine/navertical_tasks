@@ -2,7 +2,27 @@
 param()
 
 Trace-VstsEnteringInvocation $MyInvocation
-
+function FixBaseAppDep
+{
+    param(
+        $AppInfo,
+        $BaseAppVersion
+    )
+    if (-not ($AppInfo.Dependencies |Where-Object {$_.Name -eq 'Application'})) {
+        $Dep = $AppInfo.Dependencies
+        $BaseAppInfo = new-object PSObject -property @{AppId = 'c1335042-3002-4257-bf8a-75c898ccb1b8';
+            Name = "Application";
+            Publisher = "Microsoft";
+            MinVersion = $BaseAppVersion;
+            CompatibilityId = '0.0.0.0';
+            IsPropagated = $true;
+            Version = $BaseAppVersion}
+        $Dep += $BaseAppInfo
+        return $Dep
+    } else {
+        return $AppInfo.Dependencies;
+    }
+}
 try {
     # Get inputs.
     $ContainerName = Get-VstsInput -Name 'ContainerName' -Default ''
@@ -20,7 +40,8 @@ try {
     $Copyright = Get-VstsInput -Name 'Copyright' -Default ''
     $Tags = Get-VstsInput -Name 'Tags' -Default ''
     $IncludeBaseApp = Get-VstsInput -Name 'IncludeBaseApp' -AsBool
-    
+    $BaseAppVersion = Get-VstsInput -Name 'BaseAppVersion' -Default ''
+
     set-location $env:SYSTEM_DEFAULTWORKINGDIRECTORY
 
     Write-Host "Importing module NVRAppDevOps"
@@ -70,12 +91,13 @@ try {
     else {
         import-module (Get-BCModulePathFromArtifact -artifactPath ((Download-Artifacts -artifactUrl $ArtifactUrl -includePlatform)[1]))
         $AppInfo = get-navappinfo -Path $OneAppFile
-        Write-Host "Dependencies in the app: $($AppInfo.Dependencies)"
     }
     if (-not $Description) {
         $Description = $AppInfo.Description
     }
-    
+    $Dependencies = FixBaseAppDep -AppInfo $AppInfo -BaseAppVersion $BaseAppVersion
+    Write-Host "Dependencies in the app: $($Dependencies | ConvertTo-Json -Depth 100)"
+
     $AppVersion = "$($AppInfo.Version.Major).$($AppInfo.Version.Minor).$($AppInfo.Version.Build).$($AppInfo.Version.Revision)"
     Write-Host "Creating NuSpec file for $OneAppFile"
     $id = "$($AppInfo.publisher)_$($AppInfo.name)"
@@ -95,7 +117,7 @@ try {
         -description $Description `
         -copyright $Copyright `
         -tags $Tags `
-        -AppDependencies $($AppInfo.Dependencies) `
+        -AppDependencies $Dependencies `
         -IdPrefix '' `
         -IncludeBaseApp $IncludeBaseApp
 "@
@@ -114,7 +136,7 @@ try {
         -description $Description `
         -copyright $Copyright `
         -tags $Tags `
-        -AppDependencies $AppInfo.Dependencies `
+        -AppDependencies $Dependencies `
         -IdPrefix '' `
         -IncludeBaseApp $IncludeBaseApp
 
