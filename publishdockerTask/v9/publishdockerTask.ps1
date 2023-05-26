@@ -18,6 +18,7 @@ try {
     $UseDevEndpoint = Get-VstsInput -Name 'UseDevEndpoint' -AsBool -Default $false
     $AppDownloadScript = Get-VstsInput -Name 'AppDownloadScript' -Default ''
     $IncludeAppFiles = Get-VstsInput -Name 'IncludeAppFiles' -AsBool -Default $false
+    $usePaket = Get-VstsInput -Name 'UsePaket' -AsBool
 
     Write-Host "Importing module NVRAppDevOps"
     Import-Module NVRAppDevOps -DisableNameChecking
@@ -69,59 +70,69 @@ try {
         Write-Host "Get-ALAppOrder -ArtifactUrl $ArtifactUrl -Path $SourceFolder -Recurse:$Recurse"
         $AppOrder = Get-ALAppOrder -ArtifactUrl $ArtifactUrl -Path $SourceFolder -Recurse:$Recurse
 
-        Write-Host "Checking availability of dependencies ($($AppOrder.Count))..."
-        foreach ($App in ($AppOrder | where-object { $_.publisher -ne 'Microsoft' })) {
-            if ($App.AppPath -like '*.app') {
-                $AppFile = $App.AppPath
-            }
-            else {
-                $AppFiles = (Get-ChildItem -Path $SourceFolder -Filter "$($App.publisher)_$($App.name)_*.app").FullName
-                foreach ($AppFile in $AppFiles) {
-                    if ($AppFile -match '.+_(\d+\.\d+.\d+.\d+).app') {
-                        $Version = [Version]$Matches[1]
-                    }
-                    else {
-                        $Version = ''
-                    }
-                    if ($version -and ($Version -lt $App.version)) {
-                        Write-Host "Version of $AppFile is less than requested $($App.version), removing"
-                        Remove-item -Path $AppFile -Force
-                    }
-                }
-                $AppFile = (Get-ChildItem -Path $SourceFolder -Filter "$($App.publisher)_$($App.name)_*.app" | Select-Object -First 1).FullName
-            }
-            $Code = {
-                param(
-                    $ContainerName,
-                    $Tenant,
-                    $App
-                )
-                Get-BcContainerAppInfo -containerName $ContainerName -tenantSpecificProperties -sort None -Tenant $Tenant | where-object { $_.Name -eq $App.name }
-            }
-            $dockerapp = Invoke-Command -Session $pssession -ScriptBlock $Code -ArgumentList $ContainerName, $Tenant, $App  | Sort-Object -Property Version | Select-Object -Last 1
-            if ((-not $AppFile) -and (-not $dockerapp)) {
-                Write-Host "App $($App.name) from $($App.publisher) not found."
-                if ($AppDownloadScript) {
-                    Write-Host "Trying to download..."
-                    Download-ALApp -name $App.name -publisher $App.publisher -version $App.version -targetPath $SourceFolder -AppDownloadScript $AppDownloadScript -baseApplicationVersion $BCAppVersion
-                    $AppFile = (Get-ChildItem -Path $SourceFolder -Filter "$($App.publisher)_$($App.name)_*.app" | Select-Object -First 1).FullName
-                    $App.AppPath = $AppFile               
-                }
-            }
-            else {
-                if (-not $dockerapp) {
-                    Write-Host "$($App.name) found as file $($App.AppPath)"
+        if ($usePaket) {
+            Write-Host "Downloading dependencies using paket"
+            $dependencies = $AppOrder | where-object { (-not $_.AppPath) -and ($_.publisher -ne 'Microsoft') }
+            Write-Host "Downloading $($dependencies.count) dependencies from nuget with Paket..."
+            Download-ALApp -dependencies $dependencies -targetPath $PackagesPath -AppDownloadScript $AppDownloadScript -baseApplicationVersion $BCAppVersion
+   
+        }
+        else {
+
+            Write-Host "Checking availability of dependencies ($($AppOrder.Count))..."
+            foreach ($App in ($AppOrder | where-object { $_.publisher -ne 'Microsoft' })) {
+                if ($App.AppPath -like '*.app') {
+                    $AppFile = $App.AppPath
                 }
                 else {
-                    Write-Host "$($App.name) $($dockerapp.version) found already installed"
-                    if ([version]$dockerapp.version -lt [version]$App.version) {
-                        Write-Host "Version $($App.version) required, trying to download..."
+                    $AppFiles = (Get-ChildItem -Path $SourceFolder -Filter "$($App.publisher)_$($App.name)_*.app").FullName
+                    foreach ($AppFile in $AppFiles) {
+                        if ($AppFile -match '.+_(\d+\.\d+.\d+.\d+).app') {
+                            $Version = [Version]$Matches[1]
+                        }
+                        else {
+                            $Version = ''
+                        }
+                        if ($version -and ($Version -lt $App.version)) {
+                            Write-Host "Version of $AppFile is less than requested $($App.version), removing"
+                            Remove-item -Path $AppFile -Force
+                        }
+                    }
+                    $AppFile = (Get-ChildItem -Path $SourceFolder -Filter "$($App.publisher)_$($App.name)_*.app" | Select-Object -First 1).FullName
+                }
+                $Code = {
+                    param(
+                        $ContainerName,
+                        $Tenant,
+                        $App
+                    )
+                    Get-BcContainerAppInfo -containerName $ContainerName -tenantSpecificProperties -sort None -Tenant $Tenant | where-object { $_.Name -eq $App.name }
+                }
+                $dockerapp = Invoke-Command -Session $pssession -ScriptBlock $Code -ArgumentList $ContainerName, $Tenant, $App  | Sort-Object -Property Version | Select-Object -Last 1
+                if ((-not $AppFile) -and (-not $dockerapp)) {
+                    Write-Host "App $($App.name) from $($App.publisher) not found."
+                    if ($AppDownloadScript) {
+                        Write-Host "Trying to download..."
                         Download-ALApp -name $App.name -publisher $App.publisher -version $App.version -targetPath $SourceFolder -AppDownloadScript $AppDownloadScript -baseApplicationVersion $BCAppVersion
                         $AppFile = (Get-ChildItem -Path $SourceFolder -Filter "$($App.publisher)_$($App.name)_*.app" | Select-Object -First 1).FullName
                         $App.AppPath = $AppFile               
                     }
                 }
-    
+                else {
+                    if (-not $dockerapp) {
+                        Write-Host "$($App.name) found as file $($App.AppPath)"
+                    }
+                    else {
+                        Write-Host "$($App.name) $($dockerapp.version) found already installed"
+                        if ([version]$dockerapp.version -lt [version]$App.version) {
+                            Write-Host "Version $($App.version) required, trying to download..."
+                            Download-ALApp -name $App.name -publisher $App.publisher -version $App.version -targetPath $SourceFolder -AppDownloadScript $AppDownloadScript -baseApplicationVersion $BCAppVersion
+                            $AppFile = (Get-ChildItem -Path $SourceFolder -Filter "$($App.publisher)_$($App.name)_*.app" | Select-Object -First 1).FullName
+                            $App.AppPath = $AppFile               
+                        }
+                    }
+                    
+                }
             }
         }
     

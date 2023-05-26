@@ -8,7 +8,7 @@
     "author": "Kine",
     "version": {
         "Major": 9,
-        "Minor": 0,
+        "Minor": 1,
         "Patch": 0
     },
     "visibility": [
@@ -106,6 +106,14 @@
             "label": "Missing app download script",
             "defaultValue": "",
             "helpMarkDown": "This script will be used to download missing dependencies. Use parameters name, publisher, version and path inside the script."
+        },
+        {
+            "name": "UsePaket",
+            "type": "boolean",
+            "label": "Use Paket for downloading nuget dependencies",
+            "defaultValue": "false",
+            "required": false,
+            "helpMarkDown": "Use Paket manager to download the nuget dependencies"
         },
         {
             "name": "IncludeAppFiles",
