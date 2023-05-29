@@ -50,7 +50,7 @@ try {
                 param(
                     $ContainerName
                 )
-                $BCAppVersion = Get-BcContainerNavVersion $ContainerName
+                Get-BcContainerNavVersion $ContainerName
             }
             Write-Host "Getting artifactUrl from $ContainerName on host $HostName"
             $ArtifactUrl = Invoke-Command -Session $pssession -ScriptBlock $Code -ArgumentList $ContainerName
@@ -62,11 +62,11 @@ try {
             Write-Host "Getting app version from $ContainerName on host $HostName"
             $BCAppVersion = Invoke-Command -Session $pssession -ScriptBlock $CodeVersion -ArgumentList $ContainerName
         }
+        Write-Host "App version used: $BCAppVersion"
         if ($BCAppVersion.contains('-')) {
             Write-Host "Splitting $BCAppVersion"
             $BCAppVersion = ($BCAppVersion.split('-'))[0]
         }
-        Write-Host "App version used: $BCAppVersion"
         Write-Host "Getting app dependencies and order"
         Write-Host "Get-ALAppOrder -ArtifactUrl $ArtifactUrl -Path $SourceFolder -Recurse:$Recurse"
         $AppOrder = Get-ALAppOrder -ArtifactUrl $ArtifactUrl -Path $SourceFolder -Recurse:$Recurse
