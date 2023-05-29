@@ -63,7 +63,8 @@ try {
             $BCAppVersion = Invoke-Command -Session $pssession -ScriptBlock $CodeVersion -ArgumentList $ContainerName
         }
         if ($BCAppVersion.contains('-')) {
-            $BCAppVersion = $BCAppVersion.split('-')[0]
+            Write-Host "Splitting $BCAppVersion"
+            $BCAppVersion = ($BCAppVersion.split('-'))[0]
         }
         Write-Host "App version used: $BCAppVersion"
         Write-Host "Getting app dependencies and order"
