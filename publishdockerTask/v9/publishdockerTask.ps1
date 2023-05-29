@@ -74,7 +74,7 @@ try {
             Write-Host "Downloading dependencies using paket"
             $dependencies = $AppOrder | where-object { (-not $_.AppPath) -and ($_.publisher -ne 'Microsoft') }
             Write-Host "Downloading $($dependencies.count) dependencies from nuget with Paket..."
-            Download-ALApp -dependencies $dependencies -targetPath $PackagesPath -AppDownloadScript $AppDownloadScript -baseApplicationVersion $BCAppVersion
+            Download-ALApp -dependencies $dependencies -targetPath $SourceFolder -AppDownloadScript $AppDownloadScript -baseApplicationVersion $BCAppVersion
    
         }
         else {
