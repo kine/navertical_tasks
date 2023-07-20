@@ -1,0 +1,176 @@
+{
+    "id": "047393e1-82e4-4d24-8275-237409bb378b",
+    "name": "signbcapp",
+    "friendlyName": "Business Central - Sign App with certificate through Container",
+    "description": "Sign App for Dynamics 365 Business Central with usage of container",
+    "helpMarkDown": "",
+    "category": "Utility",
+    "author": "Kine",
+    "version": {
+        "Major": 2,
+        "Minor": 0,
+        "Patch": 0
+    },
+    "visibility": [
+        "Build",
+        "Release"
+    ],
+    "groups": [
+        {
+            "name": "envgroup",
+            "displayName": "Environment"
+        },
+        {
+            "name": "akvgroup",
+            "displayName": "Azure Key Vault"
+        }
+    ],
+    "instanceNameFormat": "Sign $(appname) through container $(containername)",
+    "inputs": [
+        {
+            "name": "useazurekeyvault",
+            "type": "boolean",
+            "label": "Use Azure Key Vault",
+            "defaultValue": "false",
+            "helpMarkDown": "Use HSM backed KeyVault for the certificate."
+        },
+        {
+            "name": "skiptoolinstall",
+            "type": "boolean",
+            "label": "Skip tool install",
+            "defaultValue": "false",
+            "helpMarkDown": "Skip install of tools. Use this if you have already installed the tools on the agents."
+        },
+        {
+            "name": "keyvaultname",
+            "type": "string",
+            "label": "Key Vault Name",
+            "defaultValue": "",
+            "helpMarkDown": "Name of the Key Vault",
+            "groupName": "akvgroup",
+            "visibleRule": "useazurekeyvault=true"
+        },
+        {
+            "name": "keyvaultcertificatename",
+            "type": "string",
+            "label": "Key Vault Certificate Name",
+            "defaultValue": "",
+            "helpMarkDown": "Name of the certificate in the Key Vault",
+            "groupName": "akvgroup",
+            "visibleRule": "useazurekeyvault=true"
+        },
+        {
+            "name": "accesstoken",
+            "type": "string",
+            "label": "Access Token",
+            "defaultValue": "",
+            "helpMarkDown": "Access Token to be used to authenticate to Azure Key Vault.",
+            "groupName": "akvgroup",
+            "visibleRule": "useazurekeyvault=true"
+        },
+        {
+            "name": "clientid",
+            "type": "string",
+            "label": "Client ID",
+            "defaultValue": "",
+            "helpMarkDown": "Client ID for the Azure AD Application",
+            "groupName": "akvgroup",
+            "visibleRule": "useazurekeyvault=true"
+        },
+        {
+            "name": "tenantid",
+            "type": "string",
+            "label": "Tenant ID",
+            "defaultValue": "",
+            "helpMarkDown": "Tenant ID for the Azure AD Application",
+            "groupName": "akvgroup",
+            "visibleRule": "useazurekeyvault=true"
+        },
+        {
+            "name": "clientsecret",
+            "type": "string",
+            "label": "Client Secret",
+            "defaultValue": "",
+            "helpMarkDown": "Client secret for the Azure AD Application",
+            "groupName": "akvgroup",
+            "visibleRule": "useazurekeyvault=true"
+        },
+        {
+            "name": "filedigest",
+            "type": "string",
+            "label": "File Digest",
+            "defaultValue": "sha256",
+            "helpMarkDown": "File digest to be used for signing. sha256 is recommended.",
+            "groupName": "akvgroup",
+            "visibleRule": "useazurekeyvault=true"
+        },
+        {
+            "name": "timestampservice",
+            "type": "string",
+            "label": "Timestamp Service",
+            "defaultValue": "http://timestamp.digicert.com",
+            "helpMarkDown": "Timestamp service to be used for signing. http://timestamp.digicert.com is recommended.",
+            "groupName": "akvgroup",
+            "visibleRule": "useazurekeyvault=true"
+        },
+        {
+            "name": "timestampdigest",
+            "type": "string",
+            "label": "Timestamp Digest",
+            "defaultValue": "sha256",
+            "helpMarkDown": "Timestamp digest to be used for signing. sha256 is recommended.",
+            "groupName": "akvgroup",
+            "visibleRule": "useazurekeyvault=true"
+        },
+        {
+            "name": "containername",
+            "type": "string",
+            "label": "Container Name",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Name of the container",
+            "groupName": "envgroup",
+            "visibleRule": "useazurekeyvault=false"
+        },
+        {
+            "name": "appfile",
+            "type": "string",
+            "label": "App file",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Path to the App file to be published. Filter could be used. All found files will be published"
+        },
+        {
+            "name": "appfileexclude",
+            "type": "string",
+            "label": "App file Exclude",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "Path to the App file to be excluded. Filter could be used."
+        },
+        {
+            "name": "certfile",
+            "type": "filePath",
+            "label": "Certificate file name",
+            "required": true,
+            "helpMarkDown": "Path and file name of the certificate to be used to sign the app.",
+            "visibleRule": "useazurekeyvault=false"
+        },
+        {
+            "name": "pfxpassword",
+            "type": "string",
+            "label": "Certificate password",
+            "required": false,
+            "helpMarkDown": "Password for the certificate.",
+            "visibleRule": "useazurekeyvault=false"
+        }
+    ],
+    "execution": {
+        "PowerShell3": {
+            "target": "signappTask.ps1",
+            "platform": [
+                "windows"
+            ]
+        }
+    }
+}
