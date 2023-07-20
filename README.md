@@ -64,10 +64,11 @@ After that, you can use the new tasks in your pipelines through visual designer 
 
 ## Changelog
 
-### 1.0.0
+### 0.0.0
 
 - Stabilized release
 - Added createALNuSpec:4 with switch to include Base application dependency (preview)
+- Added signbcapp v2 with support for azuresigntool to be able to sign with Code Certificate backed by HSM (using Azure KeyVault)
 
 ### 0.0.179
 
