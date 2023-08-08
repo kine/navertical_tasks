@@ -87,6 +87,14 @@ try {
             dotnet tool install --global AzureSignTool --version 4.0.1
             Write-Host "Installation complete"
         }
+        if ($env:Path -notlike "*.dotnet\tools*") {
+            $env:Path += ";%USERPROFILE%\.dotnet\tools"
+            Write-Host "Adding %USERPROFILE%\.dotnet\tools to Path environment variable"
+        }
+        else {
+            Write-Host ".dotnet\tools already in Path environment variable"
+        }
+        
 
         Write-Host "Signing these files:"
         $apps | ForEach-Object { Write-Host $_.FullName }
